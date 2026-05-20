@@ -1,12 +1,12 @@
-package com.example.demo.team7service;
+package com.example.demo.team7.service;
 //赤坂
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.team7entity.Team7Account;
-import com.example.demo.team7repositories.Team7LoginRepositories;
+import com.example.demo.team7.entity.Team7Account;
+import com.example.demo.team7.repositories.Team7LoginRepositories;
 
 @Service
 public class Team7LoginService {
