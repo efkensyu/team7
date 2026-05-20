@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html xmlns:th="http://www.thymeleaf.ofg">
+<meta charset="UTF-8">
+<title>ログイン情報確認画面</title>
+</head>
+
+<body>
+	<form method="post" th:action="@{/Team7_fromLogin}"th:object="${Team7Form}" >
+		
+		<th:block th:object="${Team7Form}">
+		<p th:text="IDは + *{id}"></p>
+		<p th:text="パスワードは + *{password}"></p>	
+		<h5>間違いないですか？</h5>
+		
+		<input type="submit" name ="back" value="修正" />
+		<input type="submit" name = "toLogin" value="送信" />
+		
+		</th:block>
+		
+	</form>
+		
+
+</body>
+</html>

@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.demo.team7.MakeAccount.Team7NewAccountForm;
+import com.example.demo.team7.MakeAccount.Team7Form;
 
 
 @Controller
-@SessionAttributes(types = Team7NewAccountForm.class)
+@SessionAttributes(types = Team7Form.class)
 
 public class Team7NewAccountController {
 	@ModelAttribute("Team7NewAccountForm")
-	public Team7NewAccountForm setupTeam7NewAccountForm() {
-		return new Team7NewAccountForm();
+	public Team7Form setupTeam7NewAccountForm() {
+		return new Team7Form();
 		
 	}
 	//ログイン画面に飛ばす　aaaはｈｔｍｌの名前なので変更
@@ -31,8 +31,6 @@ public class Team7NewAccountController {
 	 	public String calender() {
 		return "Team7/Team7Calender";
 	}
-	
-	
 	
 	
 	//新規作成の画面に行くの
