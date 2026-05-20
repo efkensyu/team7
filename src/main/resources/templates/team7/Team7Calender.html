@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.ofg">
+<head>
+<meta charset="UTF-8">
+<title>カレンダー表示</title>
+</head>
+<body>
+	<p th:text="${#calendars.year()}"></p>
+	
+	<form method="post" th:action="@{/Team7_fromLogin}">
+		<input type="submit" name="add" value="予定追加">
+		<table border="1">
+			<tr>
+				<th class="red">日</th>
+				<th>月</th>
+				<th>火</th>
+				<th>水</th>
+				<th>木</th>
+				<th>金</th>
+				<th class="sat">土</th>
+			</tr>
+			<tr th:each="week : ${week}">
+				<td th:each="day : ${day}"><input type="submit" value="1">
+					<br>
+					予定１<br>
+					予定2
+				</td>
+			</tr>
+			
+		</table>
+	</form>
+	<input type="submit" name="print" value="詳細表示">
+
+</body>
+</html>
