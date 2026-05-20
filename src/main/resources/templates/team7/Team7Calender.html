@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.ofg">
+<head>
+<meta charset="UTF-8">
+<title>カレンダー表示</title>
+</head>
+<body>
+	<!--たつざわ-->
+	<h2>カレンダー</h2>
+	<form method="post" th:action="@{/Team7_fromCalender}">
+		<input type="submit" name="add" value="予定追加">
+		
+		<div>
+			<a href="https://google.com">前の月</a>
+			<a href="https://yahoo.co.jp">次の月</a>
+		</div>
+		
+		<div>
+		<table border="1">
+			<tr>
+				<th class="red">日</th>
+				<th>月</th>
+				<th>火</th>
+				<th>水</th>
+				<th>木</th>
+				<th>金</th>
+				<th class="sat">土</th>
+			</tr>
+			<tr>
+				<td><input type="submit" value="1">
+					<br>
+					予定１<br>
+					予定2
+				</td>
+				<td><input type="submit" value="2">
+				</td>
+				<td><input type="submit" value="3">			
+				</td>
+			</tr>	
+		</table>
+		</div>
+		
+	</form>
+	<input type="submit" name="print" value="詳細表示">
+
+</body>
+</html>
