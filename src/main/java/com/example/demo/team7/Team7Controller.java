@@ -13,7 +13,7 @@ import com.example.demo.team7.MakeAccount.Team7Form;
 @Controller
 @SessionAttributes(types = Team7Form.class)
 
-public class Team7NewAccountController {
+public class Team7Controller {
 	@ModelAttribute("Team7NewAccountForm")
 	public Team7Form setupTeam7NewAccountForm() {
 		return new Team7Form();
