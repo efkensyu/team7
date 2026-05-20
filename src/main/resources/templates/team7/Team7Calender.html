@@ -6,9 +6,16 @@
 </head>
 <body>
 	<!--たつざわ-->
-	
+	<h2>カレンダー</h2>
 	<form method="post" th:action="@{/Team7_fromCalender}">
 		<input type="submit" name="add" value="予定追加">
+		
+		<div>
+			<a href="https://google.com">前の月</a>
+			<a href="https://yahoo.co.jp">次の月</a>
+		</div>
+		
+		<div>
 		<table border="1">
 			<tr>
 				<th class="red">日</th>
@@ -19,15 +26,20 @@
 				<th>金</th>
 				<th class="sat">土</th>
 			</tr>
-			<tr th:each="week : ${week}">
-				<td th:each="day : ${day}"><input type="submit" value="1">
+			<tr>
+				<td><input type="submit" value="1">
 					<br>
 					予定１<br>
 					予定2
 				</td>
-			</tr>
-			
+				<td><input type="submit" value="2">
+				</td>
+				<td><input type="submit" value="3">			
+				</td>
+			</tr>	
 		</table>
+		</div>
+		
 	</form>
 	<input type="submit" name="print" value="詳細表示">
 
