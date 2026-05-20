@@ -64,10 +64,65 @@ public class Team7NewAccountController {
 		public String bavk1() {
 		return "Team7/Team7MakeNewAccount";
 	}
-
 	
 	
 	
+	
+	//たつざわ
+	//カレンダーから予定追加の画面に行く
+	@PostMapping(value="Team7_fromCalender", params="add")
+		public String add() {
+		return "Team7/Team7PlanAdd";
+	}
+	
+	//カレンダーから予定の詳細表示の画面に行く
+	@PostMapping(value="Team7_fromCalender", params="print")
+	public String display() {
+	return "Team7/Team7PlanAdd";
+	}
+	
+	//予定追加画面から確認の画面に行く
+	@PostMapping(value="Team7_fromPlanAdd", params="confilm")
+	public String planconfilm() {
+	return "Team7/Team7PlanConfilm";
+	}
+	
+	//予定追加画面から追加画面に戻る
+	@PostMapping(value="Team7_fromPlanAdd", params="backAdd")
+	public String planback() {
+	return "Team7/Team7PlanAdd";
+	}
+	
+	//予定確認画面からカレンダーに戻る(予定の確定)
+	@PostMapping(value="Team7_fromPlanConfilm", params="confilm")
+	public String calenderback() {
+	return "Team7/Team7Calender";
+	}
+	
+	//詳細表示からカレンダーに戻る
+	@PostMapping(value="Team7_fromDisplay", params="backCalender")
+	public String backcal() {
+	return "Team7/Team7Calender";
+	}
+	
+	//詳細表示から削除確認画面に行く
+	@PostMapping(value="Team7_fromDisplay", params="confilm")
+	public String delete() {
+	return "Team7/Team7Delete";
+	}
+	
+	//削除確認画面から何もせずに戻る
+	@PostMapping(value="Team7_fromDelete", params="back")
+	public String deleteback() {
+	return "Team7/Team7Display";
+	}
+	
+	//削除確認画面から削除して戻る
+	@PostMapping(value="Team7_fromDelete", params="clear")
+	public String doingdelete() {
+		//処理を書く
+	return "Team7/Team7Display";
+	}
 	
 
 }
