@@ -46,19 +46,19 @@ public class Team7NewAccountController {
 	}
 	
 	//新規作成の確認ボタンを押し確認画面へ
-	@PostMapping(value = "/Team7_fromNew",params="confilm")
-		public String confilm() {
+	@PostMapping(value = "/Team7_fromNew",params="confirm")
+		public String confirm() {
 		return "Team7/Team7Confirm";
 	}
 	
 	//確認画面から確定するボタンを押す。TOPにいく
-	@PostMapping(value = "/Team7_fromConfirm",params="confilm")
+	@PostMapping(value = "/Team7_fromConfirm",params="confirm")
 		public String jikkou() {
 		return "Team7/Team7Login";
 	}
 	
 	//確認画面から修正する
-	@PostMapping(value = "/Team7_fromConfilm",params="back")
+	@PostMapping(value = "/Team7_fromConfirm",params="back")
 		public String bavk1() {
 		return "Team7/Team7MakeNewAccount";
 	}
@@ -80,7 +80,7 @@ public class Team7NewAccountController {
 	}
 	
 	//予定追加画面から確認の画面に行く
-	@PostMapping(value="Team7_fromPlanAdd", params="confilm")
+	@PostMapping(value="Team7_fromPlanAdd", params="confirm")
 	public String planconfilm() {
 	return "Team7/Team7PlanConfilm";
 	}
@@ -92,7 +92,7 @@ public class Team7NewAccountController {
 	}
 	
 	//予定確認画面からカレンダーに戻る(予定の確定)
-	@PostMapping(value="Team7_fromPlanConfilm", params="confilm")
+	@PostMapping(value="Team7_fromPlanConfirm", params="confilm")
 	public String calenderback() {
 	return "Team7/Team7Calender";
 	}
@@ -104,7 +104,7 @@ public class Team7NewAccountController {
 	}
 	
 	//詳細表示から削除確認画面に行く
-	@PostMapping(value="Team7_fromDisplay", params="confilm")
+	@PostMapping(value="Team7_fromDisplay", params="confirm")
 	public String delete() {
 	return "Team7/Team7Delete";
 	}

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<form method="post" th:action="@{/Team7_fromLogin}"th:object="${Team7Form}" >
+	<form method="post" th:action="@{/Team7_fromConfirm}"th:object="${Team7Form}" >
 		
 		<th:block th:object="${Team7Form}">
 		<p th:text="IDは + *{id}"></p>
@@ -15,7 +15,7 @@
 		<h5>間違いないですか？</h5>
 		
 		<input type="submit" name ="back" value="修正" />
-		<input type="submit" name = "toLogin" value="送信" />
+		<input type="submit" name = "Confirm" value="送信" />
 		
 		</th:block>
 		
