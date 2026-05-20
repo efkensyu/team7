@@ -7,4 +7,5 @@ import lombok.Data;
 public class Team7Form {
 	private String ID;
 	private String password;
+
 }
