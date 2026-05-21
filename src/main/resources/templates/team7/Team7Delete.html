@@ -2,51 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>削除確認</title>
+    <title>予定詳細</title>
 </head>
 <body>
 
-    <h3>⚠️ 削除確認</h3>
-    <p>以下の予定を削除します。よろしいですか？</p>
+    <h2 th:text="${year} + '年' + ${month} + '月' + ${day} + '日の予定'"></h2>
 
-    <!-- 削除対象の詳細をテーブルで表示 -->
-    <table>
-        <thead>
-            <tr>
-                <th>予定ID</th>
-                <th>予定名</th>
-                <th>詳細</th>
-                <th>ユーザーID</th>
-                <th>日付</th>
-            </tr>
-        </thead>
-		
-        <tbody>
-            <tr>
-                <td th:text="${deleteTarget.yoteiCd}"></td>
-                <td th:text="${deleteTarget.yoteiNm}"></td>
-                <td th:text="${deleteTarget.yoteiDetail}"></td>
-                <td th:text="${deleteTarget.userId}"></td>
-                <td th:text="${deleteTarget.yoteiDt}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <form action="/Team7_fromDisplay" method="post">
 
-    <div>
-        <!-- 削除せずに戻る -->
-        <form action="/Team7_fromDelete" method="post">
-            <input type="hidden" name="yoteiCd"
-                   th:value="${deleteTarget.yoteiCd}"/>
-            <button type="submit" name="back" value = "← 戻る"></button>
-        </form>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>選択</th>
+                    <th>予定ID</th>
+                    <th>予定名</th>
+                    <th>詳細</th>
+                    <th>ユーザーID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="s : ${CalenderEntity}">
+                    <!-- ✅ チェックボックス：yoteiCdを送る -->
+                    <td>
+                        <input type="checkbox" name="yoteiCd"
+                               th:value="${s.yoteiCd}"/>
+                    </td>
+                    <td th:text="${s.yoteiCd}"></td>
+                    <td th:text="${s.yoteiNm}"></td>
+                    <td th:text="${s.yoteiDetail}"></td>
+                    <td th:text="${s.userId}"></td>
+                </tr>
+            </tbody>
+        </table>
 
-        <!-- 削除して戻る -->
-        <form action="/Team7_fromDelete" method="post">
-            <input type="hidden" name="yoteiCd"
-                   th:value="${deleteTarget.yoteiCd}"/>
-            <button type="submit" name="clear" value ="削除する"></button>
-        </form>
-    </div>
+        <!-- ボタンエリア -->
+        <div>
+            <!-- 削除確認画面へ -->
+            <button type="submit" name="confirm">🗑 削除する</button>
+        </div>
+
+    </form>
+
+    <!-- カレンダーに戻る（別フォーム） -->
+    <form action="/Team7_fromDisplay" method="post">
+        <button type="submit" name="backCalender">← カレンダーに戻る</button>
+    </form>
 
 </body>
 </html>
