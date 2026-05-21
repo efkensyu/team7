@@ -1,125 +1,114 @@
 package com.example.demo.team7;
 //もりもと
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.demo.team7.MakeAccount.Team7Form;
 
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @SessionAttributes(types = Team7Form.class)
+@RequiredArgsConstructor
 
 public class Team7Controller {
+
+    private final Team7displayService service;
+
+    
 	@ModelAttribute("Team7NewAccountForm")
 	public Team7Form setupTeam7NewAccountForm() {
 		return new Team7Form();
 		
 	}
-	//ログイン画面に飛ばす　aaaはｈｔｍｌの名前なので変更
-	@GetMapping("/Team7Login")
-	 public String login() {
-		return "Team7/Team7Login";
-	}
-	
-	 
-	//カレンダー画面に移動Post ようはログインしましたよ状態
-	@PostMapping(value = "/Team7_fromLogin",params = "login")
-	 	public String calender() {
-		return "Team7/Team7Calender";
-	}
-	
-	
-	//新規作成の画面に行くの
-	@PostMapping(value = "/Team7_fromLogin",params="make")
-		public String make() {
-		return "Team7/Team7MakeNewAccount";
-	}
-	
-	//新規画面からログイン画面に戻る
-	@PostMapping(value = "/Team7_fromNew",params="backTop")
-		public String back() {
-		return "Team7/Team7Login";
-	}
-	
-	//新規作成の確認ボタンを押し確認画面へ
-	@PostMapping(value = "/Team7_fromNew",params="confirm")
-		public String confirm() {
-		return "Team7/Team7Confirm";
-	}
-	
-	//確認画面から確定するボタンを押す。TOPにいく
-	@PostMapping(value = "/Team7_fromConfirm",params="confirm")
-		public String jikkou() {
-		return "Team7/Team7Login";
-	}
-	
-	//確認画面から修正する
-	@PostMapping(value = "/Team7_fromConfirm",params="back")
-		public String bavk1() {
-		return "Team7/Team7MakeNewAccount";
-	}
-	
-	
-	
+	//カレンダー画面に飛ばす
+	@GetMapping("/Team7Calender")
+	 public String calender() {
+		return "team7/Team7Calender";
+	}	
+
 	
 	//たつざわ
 	//カレンダーから予定追加の画面に行く
-	@PostMapping(value="Team7_fromCalender", params="add")
+	@PostMapping(value="/Team7_fromCalender", params="add")
 		public String add() {
-		return "Team7/Team7PlanAdd";
+		return "team7/Team7PlanAdd";
 	}
 	
 	//カレンダーから予定の詳細表示の画面に行く
-	@PostMapping(value="Team7_fromCalender", params="print")
-	public String display() {
-	return "Team7/Team7PlanAdd";
+	@PostMapping(value="/Team7_fromCalender", params="print")
+	public String display(
+	        @RequestParam("year")  int year,
+	        @RequestParam("month") int month,
+	        @RequestParam("day")   int day,
+	        Model model) {
+
+	    try {
+	        String dateStr = year + "/" + month + "/" + day;
+	        Date date = new SimpleDateFormat("yyyy/M/d").parse(dateStr);
+	        List<Team7CalenderEntity> schedules = service.getTeam7CalenderEntityByDate(date);
+	        model.addAttribute("schedules", schedules);
+	        model.addAttribute("year", year);
+	        model.addAttribute("month", month);
+	        model.addAttribute("day", day);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return "team7/Team7Display";
 	}
 	
 	//予定追加画面から確認の画面に行く
-	@PostMapping(value="Team7_fromPlanAdd", params="confirm")
-	public String planconfilm() {
-	return "Team7/Team7PlanConfilm";
+	@PostMapping(value="/Team7_fromPlanAdd", params="confilm")
+		public String planconfilm() {
+		return "team7/Team7Confirm";
 	}
 	
-	//予定追加画面から追加画面に戻る
-	@PostMapping(value="Team7_fromPlanAdd", params="backAdd")
-	public String planback() {
-	return "Team7/Team7PlanAdd";
+	//予定追加画面からカレンダーに戻る
+	@PostMapping(value="/Team7_fromPlanAdd", params="back")
+		public String planback() {
+		return "team7/Team7Calender";
 	}
 	
-	//予定確認画面からカレンダーに戻る(予定の確定)
-	@PostMapping(value="Team7_fromPlanConfirm", params="confilm")
-	public String calenderback() {
-	return "Team7/Team7Calender";
+	//追加確認画面からカレンダーに戻る(予定の確定)
+	@PostMapping(value="/Team7_fromPlanConfirm", params="confilm")
+		public String calenderback() {
+		return "team7/Team7Calender";
 	}
 	
 	//詳細表示からカレンダーに戻る
-	@PostMapping(value="Team7_fromDisplay", params="backCalender")
-	public String backcal() {
-	return "Team7/Team7Calender";
+	@PostMapping(value="/Team7_fromDisplay", params="backCalender")
+		public String backcal() {
+		return "team7/Team7Calender";
 	}
 	
 	//詳細表示から削除確認画面に行く
-	@PostMapping(value="Team7_fromDisplay", params="confirm")
-	public String delete() {
-	return "Team7/Team7Delete";
+	@PostMapping(value="/Team7_fromDisplay", params="confirm")
+		public String delete() {
+		return "team7/Team7Delete";
 	}
 	
 	//削除確認画面から何もせずに戻る
-	@PostMapping(value="Team7_fromDelete", params="back")
-	public String deleteback() {
-	return "Team7/Team7Display";
+	@PostMapping(value="/Team7_fromDelete", params="back")
+		public String deleteback() {
+		return "team7/Team7Display";
 	}
 	
 	//削除確認画面から削除して戻る
-	@PostMapping(value="Team7_fromDelete", params="clear")
-	public String doingdelete() {
-		//処理を書く
-	return "Team7/Team7Display";
+	@PostMapping(value="/Team7_fromDelete", params="clear")
+		public String doingdelete() {
+			//処理を書く
+		return "team7/Team7Display";
 	}
 	
 

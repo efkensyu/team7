@@ -20,12 +20,13 @@ public class Team7Log {
 	@Around("execution (* com.example.demo.team7.*.*(..))")
 	public Object aroundLog(ProceedingJoinPoint jp) throws Throwable {
 		try {
+			System.out.println("開始");
 			log.info("メソッド開始： " + jp.getSignature());
 			log.info("送ったデータ： " + Arrays.toString(jp.getArgs()));
 			Object result = jp.proceed();
 			return result;
 		} catch(Exception e) {
-			return "error";
+			return "team7/Team7Error";
 			
 		}
 	}

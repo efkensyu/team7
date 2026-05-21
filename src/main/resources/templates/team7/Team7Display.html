@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>予定詳細</title>
+</head>
+<body>
+
+    <h2 th:text="${year} + '年' + ${month} + '月' + ${day} + '日の予定'"></h2>
+
+    <!-- 予定一覧テーブル -->
+    <table>
+        <thead>
+            <tr>
+                <th>予定ID</th>
+                <th>予定名</th>
+                <th>詳細</th>
+                <th>ユーザーID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="s : ${Team7CalenderEntity}">
+                <td th:text="${s.yoteiCd}"></td>
+                <td th:text="${s.yoteiNm}"></td>
+                <td th:text="${s.yoteiDetail}"></td>
+                <td th:text="${s.userId}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ボタンエリア -->
+    <div class="btn-area">
+        <!-- カレンダーに戻るボタン -->
+        <input type="submit" th:action="@{/Team7_fromDisplay}" name="backCalender" value="← カレンダーに戻る">
+
+        <!-- 削除画面へのボタン（予定IDをPOSTで送る） -->
+        <form th:each="s : ${Team7CalenderEntity}"
+              th:action="@{/Team7_fromDisplay}"
+              method="post">
+			  
+            <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
+            <button type="submit" class="btn btn-delete">
+                🗑 予定を削除する
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
