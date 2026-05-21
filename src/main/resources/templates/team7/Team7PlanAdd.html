@@ -14,8 +14,8 @@
 			<option value="b"><th:block th:text="mon">2月</th:block></option>
 		</select>
 		<select name="day">
-					<option value="a"><th:block th:text="mon">1日</th:block></option>
-					<option value="b"><th:block th:text="mon">2日</th:block></option>
+				<option value="a"><th:block th:text="day">1日</th:block></option>
+				<option value="b"><th:block th:text="day">2日</th:block></option>
 		</select>
 		<br>
 		<p>予定を入力</p>
@@ -23,11 +23,12 @@
 		<br>
 		<p>予定の詳細を入力</p>
 		<textarea name="textarea1" rows="5" cols="20"></textarea>
+		<br>
+		<!--予定確認画面に行く-->
+		<input type="submit" name="confilm" value="確認" />
+		<!--カレンダーに戻る-->
+		<input type="submit" name="back" value="カレンダーに戻る" />
 	</form>
-	<!--予定確認画面に行く-->
-	<input type="submit" name="confilm" value="確認">
-	<!--カレンダーに戻る-->
-	<input type="submit" name="backCalander" value="カレンダーに戻る">
 
 </body>
 </html>
