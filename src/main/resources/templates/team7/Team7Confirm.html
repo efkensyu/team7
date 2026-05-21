@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<form method="post" th:action="@{/Team7_fromConfirm}"th:object="${Team7NewAccountForm}" >
+	<form method="post" th:action="@{/Team7_fromConfirm}"th:object="${team7NewAccountForm}" >
 		
 		<th:block th:object="${Team7NewAccountForm}">
 		<p th:text="IDは + *{id}"></p>

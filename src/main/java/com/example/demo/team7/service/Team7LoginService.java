@@ -3,6 +3,7 @@ package com.example.demo.team7.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.team7.entity.Team7Account;
@@ -11,6 +12,7 @@ import com.example.demo.team7.repositories.Team7LoginRepositories;
 @Service
 public class Team7LoginService {
 
+	@Autowired
     private Team7LoginRepositories repository;
 
     public boolean loginCheck(String userCd, String userPw) {
