@@ -1,19 +1,31 @@
 package com.example.demo.team7;
 //もりもと
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.demo.team7.MakeAccount.Team7Form;
 
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @SessionAttributes(types = Team7Form.class)
+@RequiredArgsConstructor
 
 public class Team7Controller {
+
+    private final Team7displayService service;
+
+    
 	@ModelAttribute("Team7NewAccountForm")
 	public Team7Form setupTeam7NewAccountForm() {
 		return new Team7Form();
@@ -35,8 +47,25 @@ public class Team7Controller {
 	
 	//カレンダーから予定の詳細表示の画面に行く
 	@PostMapping(value="/Team7_fromCalender", params="print")
-		public String display() {
-		return "team7/Team7Display";
+	public String display(
+	        @RequestParam("year")  int year,
+	        @RequestParam("month") int month,
+	        @RequestParam("day")   int day,
+	        Model model) {
+
+	    try {
+	        String dateStr = year + "/" + month + "/" + day;
+	        Date date = new SimpleDateFormat("yyyy/M/d").parse(dateStr);
+	        List<Team7CalenderEntity> schedules = service.getTeam7CalenderEntityByDate(date);
+	        model.addAttribute("schedules", schedules);
+	        model.addAttribute("year", year);
+	        model.addAttribute("month", month);
+	        model.addAttribute("day", day);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return "team7/Team7Display";
 	}
 	
 	//予定追加画面から確認の画面に行く
