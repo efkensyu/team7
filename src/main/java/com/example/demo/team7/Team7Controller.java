@@ -1,8 +1,8 @@
 package com.example.demo.team7;
 //もりもと
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,37 @@ public class Team7Controller {
 	}
 	//カレンダー画面に飛ばす
 	@GetMapping("/Team7Calender")
-	 public String calender() {
+	 public String calender(
+			 @RequestParam int year,
+			 @RequestParam int month,
+			 @RequestParam int day,
+			 Model model) {
+		
+		//今日の日付を取得
+		LocalDate today = LocalDate.now();
+		
+		//前月・次月の計算
+		LocalDate firstDay = LocalDate.of(today.getYear(),today.getMonthValue(),1);
+		LocalDate prevMon = firstDay.minusMonths(1);
+		LocalDate nextMon = firstDay.plusMonths(1);
+		
+		int firstDayOfWeek = firstDay.getDayOfWeek().getValue();
+		if (firstDayOfWeek == 7) {
+			firstDayOfWeek = 0;
+		}
+		
+		int daysInMonth = firstDay.lengthOfMonth();
+		
+		
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day);
+		model.addAttribute("prevYear",prevMon.getYear());
+		model.addAttribute("prevMonth",prevMon.getMonthValue());
+		model.addAttribute("nextYear", nextMon.getYear());
+		model.addAttribute("nextMon", nextMon.getMonthValue());
+		model.addAttribute("firstDayOfWeek",firstDayOfWeek);
+		model.addAttribute("daysInMonth",daysInMonth);
 		return "team7/Team7Calender";
 	}	
 
@@ -55,9 +85,10 @@ public class Team7Controller {
 	        Model model) {
 
 	    try {
-	        String dateStr = year + "/" + month + "/" + day;
-	        Date date = new SimpleDateFormat("yyyy/M/d").parse(dateStr);
-	        List<Team7CalenderEntity> schedules = service.getTeam7CalenderEntityByDate(date);
+//s	        String dateStr = year + "/" + month + "/" + day;
+	        DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/M/d");
+	        LocalDate dateLd = LocalDate.parse(year + "/" + month + "/" + day ,date);
+	        List<Team7CalenderEntity> schedules = service.getTeam7CalenderEntityByDate(dateLd);
 	        model.addAttribute("schedules", schedules);
 	        model.addAttribute("year", year);
 	        model.addAttribute("month", month);

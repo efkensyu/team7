@@ -9,11 +9,10 @@
 	<h2>カレンダー</h2>
 	<form method="post" th:action="@{/Team7_fromCalender}">
 		<input type="submit" name="add" value="予定追加" />
-		<th:block th:object="${user}"></th:block>
 		
 		<div>
-			<a href="https://google.com">前の月</a>
-			<a href="https://yahoo.co.jp">次の月</a>
+			<a href="@{/team7/Team7Calender(year=${prevYear},month=${prevMonth})}">前の月</a>
+			<a href="@{/team7/Team7Calender(year=${nextYear},month=${nextMonth})}">次の月</a>
 		</div>
 		
 		<div>
@@ -27,8 +26,8 @@
 				<th>金</th>
 				<th class="sat">土</th>
 			</tr>
-			<tr>
-				<td><input type="submit" value="1">
+			<tr th:each="week : ${#numbers.sequence(1,6)}">
+				<td th:each="dayOfWeek : ${#numbers.sequence(0,6)}"><input type="submit" value="1">
 					<br>
 					予定１<br>
 					予定2

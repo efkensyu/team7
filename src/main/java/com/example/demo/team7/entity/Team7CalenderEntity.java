@@ -1,6 +1,6 @@
 package com.example.demo.team7.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,6 +24,6 @@ public class Team7CalenderEntity {
 	private String yoteiDetail;  //予定の詳細
 	private Integer userId;  //ユーザーID
 	@NotBlank(message="日付を入力してください")
-	private Date yoteiDt; //日付
+	private LocalDate yoteiDt; //日付
 
 }
