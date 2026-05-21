@@ -1,4 +1,4 @@
-package com.example.demo.team7.MakeAccount;
+package com.example.demo.team7;
 
 import java.util.Date;
 
