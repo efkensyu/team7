@@ -35,9 +35,7 @@ public class Team7Controller {
 	//カレンダー画面に飛ばす
 	@GetMapping("/Team7Calender")
 	 public String calender(
-			 @RequestParam int year,
-			 @RequestParam int month,
-			 @RequestParam int day,
+			 
 			 Model model) {
 		
 		//今日の日付を取得
@@ -48,17 +46,19 @@ public class Team7Controller {
 		LocalDate prevMon = firstDay.minusMonths(1);
 		LocalDate nextMon = firstDay.plusMonths(1);
 		
+		//月の始めの曜日を取得し、日曜なら0にする
 		int firstDayOfWeek = firstDay.getDayOfWeek().getValue();
 		if (firstDayOfWeek == 7) {
 			firstDayOfWeek = 0;
 		}
 		
+		//月の日数を取得
 		int daysInMonth = firstDay.lengthOfMonth();
 		
 		
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
+		model.addAttribute("year", today.getYear());
+		model.addAttribute("month", today.getMonthValue());
+		model.addAttribute("day", today.getDayOfMonth());
 		model.addAttribute("prevYear",prevMon.getYear());
 		model.addAttribute("prevMonth",prevMon.getMonthValue());
 		model.addAttribute("nextYear", nextMon.getYear());
@@ -85,7 +85,7 @@ public class Team7Controller {
 	        Model model) {
 
 	    try {
-//s	        String dateStr = year + "/" + month + "/" + day;
+//	        String dateStr = year + "/" + month + "/" + day;
 	        DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/M/d");
 	        LocalDate dateLd = LocalDate.parse(year + "/" + month + "/" + day ,date);
 	        List<Team7CalenderEntity> schedules = service.getTeam7CalenderEntityByDate(dateLd);
@@ -109,7 +109,7 @@ public class Team7Controller {
 	//予定追加画面からカレンダーに戻る
 	@PostMapping(value="/Team7_fromPlanAdd", params="back")
 		public String planback() {
-		return "team7/Team7Calender";
+		return "redirect:/Team7Calender";
 	}
 	
 	//追加確認画面からカレンダーに戻る(予定の確定)

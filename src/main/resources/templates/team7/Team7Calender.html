@@ -27,14 +27,10 @@
 				<th class="sat">土</th>
 			</tr>
 			<tr th:each="week : ${#numbers.sequence(1,6)}">
-				<td th:each="dayOfWeek : ${#numbers.sequence(0,6)}"><input type="submit" value="1">
-					<br>
-					予定１<br>
-					予定2
-				</td>
-				<td><input type="submit" value="2">
-				</td>
-				<td><input type="submit" value="3">			
+				<td th:each="dayOfWeek : ${#numbers.sequence(0,6)}"
+					th:with="cellIndex=${(week -1) * 7 +dayOfWeek},
+							 dateNum=${cellIndex - firstDayOfWeek + 1}">
+					<input type="button" th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:value="${dateNum}">
 				</td>
 			</tr>	
 		</table>

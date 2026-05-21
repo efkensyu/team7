@@ -9,14 +9,7 @@
 	<h2>予定追加</h2>
 	<form method="post" th:action="@{/Team7_fromPlanAdd}">
 		<p>日付</p>
-		<select name="month">
-			<option value="a"><th:block th:text="mon">1月</th:block></option>
-			<option value="b"><th:block th:text="mon">2月</th:block></option>
-		</select>
-		<select name="day">
-				<option value="a"><th:block th:text="day">1日</th:block></option>
-				<option value="b"><th:block th:text="day">2日</th:block></option>
-		</select>
+		<input type="date">
 		<br>
 		<p>予定を入力</p>
 		<input type="text" />
