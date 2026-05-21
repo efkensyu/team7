@@ -6,9 +6,9 @@
 </head>
 <body>
 	
-	<h2>ログイン画面</h2>
+	<h2>新規登録</h2>
 	
-	<form method="post" th:action="@{/Team7_fromLogin}">
+	<form method="post" th:action="@{/Team7_fromNewAccount}">
 	        <div>
 	            ユーザーID：
 	            <input type="text" name="userCd" >
@@ -19,7 +19,7 @@
 	            <input type="password" name="userPw">
 	        </div>
 	        <br>
-	        <button type="submit" name="login">ログイン</button>
-	        <button type="submit" name="make" >新規アカウント作成</button>
+	        <button type="submit" name="make">新規アカウント登録</button>
+	        <button type="submit" name="back">ログイン画面に戻る</button>
 	    </form>
 </body>
