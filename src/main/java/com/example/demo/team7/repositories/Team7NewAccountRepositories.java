@@ -11,9 +11,9 @@ import com.example.demo.team7.entity.Team7NewAccount;
 
 @Repository
 public interface Team7NewAccountRepositories extends JpaRepository<Team7NewAccount, String>{
-	public List<Team7NewAccount> findByNewUserCd(String Newcode);
+	public List<Team7NewAccount> findByNewuserCd(String code);
 
 	
-	@Query(value = "select * from user_tbl where user_cd = :code", nativeQuery = true)
-	public List<Team7NewAccount> findBumonCd(@Param("code") String code);
+	@Query(value = "select * from user_tbl where Newuser_cd = :code", nativeQuery = true)
+	public List<Team7NewAccount> findNewuserCd(@Param("code") String code);
 }
