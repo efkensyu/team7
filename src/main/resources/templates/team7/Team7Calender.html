@@ -9,6 +9,7 @@
 	<h2>カレンダー</h2>
 	<form method="post" th:action="@{/Team7_fromCalender}">
 		<input type="submit" name="add" value="予定追加" />
+		<th:block th:object="${user}"></th:block>
 		
 		<div>
 			<a href="https://google.com">前の月</a>
