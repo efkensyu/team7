@@ -34,15 +34,13 @@
         <input type="submit" th:action="@{/Team7_fromDisplay}" name="backCalender" value="← カレンダーに戻る">
 
         <!-- 削除画面へのボタン（予定IDをPOSTで送る） -->
-        <form th:each="s : ${Team7CalenderEntity}"
-              th:action="@{/Team7_fromDisplay}"
-              method="post">
-			  
+		<form action="/Team7_fromDisplay" method="post">
+		     <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
+		     <button type="submit" name="confirm"
+		                    class="btn btn-delete"value="削除"></button>
+		</form>
             <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
-            <button type="submit" class="btn btn-delete">
-                🗑 予定を削除する
-            </button>
-        </form>
+            <button type="submit" class="btn btn-delete" value="🗑 予定を削除する"></button>
     </div>
 
 </body>

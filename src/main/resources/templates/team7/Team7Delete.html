@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>削除確認</title>
+</head>
+<body>
+
+    <h3>⚠️ 削除確認</h3>
+    <p>以下の予定を削除します。よろしいですか？</p>
+
+    <!-- 削除対象の詳細をテーブルで表示 -->
+    <table>
+        <thead>
+            <tr>
+                <th>予定ID</th>
+                <th>予定名</th>
+                <th>詳細</th>
+                <th>ユーザーID</th>
+                <th>日付</th>
+            </tr>
+        </thead>
+		
+        <tbody>
+            <tr>
+                <td th:text="${deleteTarget.yoteiCd}"></td>
+                <td th:text="${deleteTarget.yoteiNm}"></td>
+                <td th:text="${deleteTarget.yoteiDetail}"></td>
+                <td th:text="${deleteTarget.userId}"></td>
+                <td th:text="${deleteTarget.yoteiDt}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <!-- 削除せずに戻る -->
+        <form action="/Team7_fromDelete" method="post">
+            <input type="hidden" name="yoteiCd"
+                   th:value="${deleteTarget.yoteiCd}"/>
+            <button type="submit" name="back" value = "← 戻る"></button>
+        </form>
+
+        <!-- 削除して戻る -->
+        <form action="/Team7_fromDelete" method="post">
+            <input type="hidden" name="yoteiCd"
+                   th:value="${deleteTarget.yoteiCd}"/>
+            <button type="submit" name="clear" value ="削除する"></button>
+        </form>
+    </div>
+
+</body>
+</html>

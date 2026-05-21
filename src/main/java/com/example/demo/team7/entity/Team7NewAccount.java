@@ -11,6 +11,6 @@ import lombok.Data;
 @Data
 public class Team7NewAccount {
 	@Id
-	private String NewuserCd;
-	private String NewuserPw;
+	private String newuserCd;
+	private String newuserPw;
 }
