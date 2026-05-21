@@ -1,4 +1,4 @@
-package com.example.demo.team7repositories;
+package com.example.demo.team7.repositories;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.team7entity.Team7Account;
+import com.example.demo.team7.entity.Team7Account;
 
 @Repository
 public interface Team7LoginRepositories extends JpaRepository<Team7Account, String>{

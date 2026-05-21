@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.ofg">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2>ログイン画面</h2>
+	
+	<form method="post" th:action="@{/Team7_fromLogin}">
+	        <div>
+	            ユーザーID：
+	            <input type="text" name="userCd" >
+	        </div>
+	        <br>
+	        <div>
+	            パスワード：
+	            <input type="password" name="userPw">
+	        </div>
+	        <br>
+	        <button type="submit" name="login">ログイン</button>
+	        <button type="submit" name="make" formnovalidate>新規アカウント作成</button>
+	    </form>
+</body>
+</htmlxmlns:th="http://www.thymeleaf.ofg">
