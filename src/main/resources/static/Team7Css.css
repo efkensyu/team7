@@ -1,0 +1,10 @@
+table{
+	border-style: dotted;	
+}
+
+th.red {
+	color: red;
+}
+th.sat {
+	color: blue;
+}
