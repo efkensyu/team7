@@ -41,7 +41,7 @@ public class Team7LoginController {
 			model.addAttribute("error", "ユーザーIDまたはパスワードが間違っています。");
 			return "team7/Team7Login";
 		} else {
-			return "redirect:/team7/Team7Calender";
+			return "redirect:/Team7Calender";
 		}
 	}
 	
