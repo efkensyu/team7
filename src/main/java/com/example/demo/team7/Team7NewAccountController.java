@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-@SessionAttributes(types = Team7NewAccountForm.class)
+@SessionAttributes(names = "team7NewAccountForm")
 public class Team7NewAccountController {
 
 
@@ -34,14 +34,18 @@ public class Team7NewAccountController {
 	}
 	
 	@PostMapping(value = "/Team7_fromNewAccount",params = "make") 
-	public String Newchecker(@ModelAttribute String userCd, String userPw, Model model) {
+	public String Newchecker(@ModelAttribute("team7NewAccountForm") Team7NewAccountForm form, Model model) {
+        String userCd = form.getUserCd();
+        String userPw = form.getUserPw();
+        
 		boolean Newcheck = newAccountService.AccountCheck(userCd, userPw);
 		
 		if (!Newcheck) {
 			model.addAttribute("error", "このユーザー名は既に存在します。");
-			return "team7/Team7NewAccount";
-		} else {
 			return "redirect:/team7/Team7Controller";
+
+		} else {
+			return "team7/Team7Confirm";
 		}
 	}
 	
@@ -49,5 +53,11 @@ public class Team7NewAccountController {
 	public String back() {
 		return "redirect:/team7/Team7Controller";
 	}
-
+	
+	@PostMapping(value = "/Team7_fromConfirm",params = "back")
+	public String backNewAccount() {
+		return "team7/Team7NewAccount";
+	}
+	
+	
 }
