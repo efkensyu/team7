@@ -1,0 +1,52 @@
+package com.example.demo.team7;
+//赤坂
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.example.demo.team7.MakeAccount.Team7Form;
+import com.example.demo.team7.service.Team7LoginService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Controller
+@SessionAttributes(types = Team7Form.class)
+public class Team7LoginController {
+
+    private final Team7Login team7Login;
+
+	@ModelAttribute("Team7AccountForm")
+	public Team7Form setupTeam7AccountForm() {
+		return new Team7Form();
+		
+	}
+	
+	private final Team7LoginService loginService;
+	
+	//ログイン画面に飛ばす　aaaはｈｔｍｌの名前なので変更
+	@GetMapping("/Team7Login")
+	 public String login() {
+		return "Team7/Team7Login";
+	}
+	
+	@PostMapping(value = "/Team7_fromLogin",params = "login") 
+	public String checker(@RequestParam("userCd") String userCd, @RequestParam("userPw") String userPw, Model model) {
+		boolean check = loginService.loginCheck(userCd, userPw);
+		
+		if (!check) {
+			model.addAttribute("error", "ユーザーIDまたはパスワードが間違っています。");
+			return "team7/Team7Login";
+		} else {
+			return "redirect:/team7/Team7Controller";
+		}
+	}
+	
+//	@PostMapping(value = "/Team7_fromLogin",params = "make")
+	
+}
