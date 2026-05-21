@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.example.demo.team7.entity.Team7CalenderEntity;
+
 	public interface Team7CalenderRepository extends JpaRepository<Team7CalenderEntity, String> {
 	    List<Team7CalenderEntity> findByYoteiDt(Date date);
 
