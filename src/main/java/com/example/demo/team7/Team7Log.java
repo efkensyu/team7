@@ -26,7 +26,7 @@ public class Team7Log {
 			Object result = jp.proceed();
 			return result;
 		} catch(Exception e) {
-			return "error";
+			return "team7/Team7Error";
 			
 		}
 	}
