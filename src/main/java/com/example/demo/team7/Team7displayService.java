@@ -1,5 +1,5 @@
 package com.example.demo.team7;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class Team7displayService {
 	private final Team7CalenderRepository repository;
 	
 	@Transactional(readOnly = true)
-		public List<Team7CalenderEntity>  getTeam7CalenderEntityByDate(Date date) {
+		public List<Team7CalenderEntity>  getTeam7CalenderEntityByDate(LocalDate date) {
 		List<Team7CalenderEntity>list =repository.findByYoteiDt(date);
 		 
 		 if (list.isEmpty()){
