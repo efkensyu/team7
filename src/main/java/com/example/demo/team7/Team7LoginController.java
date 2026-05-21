@@ -19,8 +19,6 @@ import lombok.RequiredArgsConstructor;
 @SessionAttributes(types = Team7Form.class)
 public class Team7LoginController {
 
-    private final Team7Login team7Login;
-
 	@ModelAttribute("Team7AccountForm")
 	public Team7Form setupTeam7AccountForm() {
 		return new Team7Form();
@@ -32,7 +30,7 @@ public class Team7LoginController {
 	//ログイン画面に飛ばす　aaaはｈｔｍｌの名前なので変更
 	@GetMapping("/Team7Login")
 	 public String login() {
-		return "Team7/Team7Login";
+		return "team7/Team7Login";
 	}
 	
 	@PostMapping(value = "/Team7_fromLogin",params = "login") 
@@ -43,10 +41,14 @@ public class Team7LoginController {
 			model.addAttribute("error", "ユーザーIDまたはパスワードが間違っています。");
 			return "team7/Team7Login";
 		} else {
-			return "redirect:/team7/Team7Controller";
+			return "redirect:/Team7Calender";
 		}
 	}
 	
-//	@PostMapping(value = "/Team7_fromLogin",params = "make")
+	@PostMapping(value = "/Team7_fromLogin",params = "make")
+	public String make() {
+		return "redirect:/Team7NewAccount";
+		
+	}
 	
 }
