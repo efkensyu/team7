@@ -36,12 +36,11 @@
         <!-- 削除画面へのボタン（予定IDをPOSTで送る） -->
 		<form action="/Team7_fromDisplay" method="post">
 		     <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
-		     <button type="submit" name="confirm"
-		                    class="btn btn-delete"value="削除"></button>
-		</form>
+		     <button type="submit" name="confirm"value="削除"></button>
             <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
-            <button type="submit" class="btn btn-delete" value="🗑 予定を削除する"></button>
-    </div>
+            <button type="submit" value="🗑 予定を削除する"></button>
+  		</form>			
+	  </div>
 
 </body>
 </html>
