@@ -18,7 +18,7 @@ public class Team7LNewAccountService {
 
     public boolean AccountCheck(String userCd, String userPw) {
 
-        List<Team7NewAccount> list = repository.findBynewUserCd(userCd);
+        List<Team7NewAccount> list = repository.findByNewuserCd(userCd);
 
         // ユーザーが存在しない場合
         if (list == null || list.isEmpty()) {
@@ -34,8 +34,8 @@ public class Team7LNewAccountService {
         
         // 画面から渡ってきた値をエンティティにセット
         // （※セッター名は Team7NewAccount クラスの定義に合わせて適宜変更してください）
-        newAccount.setUserCd(userCd);
-        newAccount.setUserPw(userPw);
+        newAccount.setNewuserCd(userCd);
+        newAccount.setNewuserPw(userPw);
         
         // リポジトリの標準機能「saveメソッド」を使ってDBに保存（INSERT）する
         repository.save(newAccount);
