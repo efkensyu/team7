@@ -51,7 +51,7 @@ public class Team7NewAccountController {
 	
 	@PostMapping(value = "/Team7_fromNewAccount",params = "back")
 	public String back() {
-		return "redirect:/Team7LoginController";
+		return "redirect:/Team7Login";
 	}
 	
 	@PostMapping(value = "/Team7_fromConfirm",params = "back")
@@ -59,5 +59,12 @@ public class Team7NewAccountController {
 		return "redirect:/Team7NewAccount";
 	}
 	
-	
+	@PostMapping(value = "/Team7_fromConfirm",params = "Confirm")
+	public String Confirm(@ModelAttribute("team7NewAccountForm") Team7NewAccountForm form) {
+		String userCd = form.getUserCd();
+        String userPw = form.getUserPw();
+        
+		newAccountService.registerAccount(userCd, userPw);
+		return "redirect:/Team7Login";
+	}
 }

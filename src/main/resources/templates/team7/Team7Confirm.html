@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.ofg">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>ログイン情報確認画面</title>
@@ -8,9 +8,9 @@
 <body>
 	<form method="post" th:action="@{/Team7_fromConfirm}"th:object="${team7NewAccountForm}" >
 		
-		<th:block th:object="${Team7NewAccountForm}">
-		<p th:text="IDは + *{id}"></p>
-		<p th:text="パスワードは + *{password}"></p>	
+		<th:block th:object="${team7NewAccountForm}">
+		<p th:text="IDは + *{userCd}"></p>
+		<p th:text="パスワードは + *{userPw}"></p>	
 		<h5>間違いないですか？</h5>
 		
 		<input type="submit" name ="back" value="修正" />

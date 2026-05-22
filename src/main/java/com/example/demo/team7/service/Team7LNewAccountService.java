@@ -14,11 +14,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class Team7LNewAccountService {
 
-    private Team7NewAccountRepositories repository;
+    private final Team7NewAccountRepositories repository;
 
     public boolean AccountCheck(String userCd, String userPw) {
 
-        List<Team7NewAccount> list = repository.findByNewuserCd(userCd);
+    	List<Team7NewAccount> list = repository.findNewuserCd(userCd);
 
         // ユーザーが存在しない場合
         if (list == null || list.isEmpty()) {
