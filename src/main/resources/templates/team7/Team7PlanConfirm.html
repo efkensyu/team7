@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.ofg">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	
 <meta charset="UTF-8">
 <title>追加確認</title>
 </head>
-
 <body>
-	<form method="post"th:action="@{/Team7_fromPlanConfirm}"  th:object="${team7CalenderForm}">
-		
-		<p th:text="日付：+ *{data}"></p>
-		<p th:text="予定名：+ *{sche}"></p>
-		<p th:text="詳細：+ *{detail}"></p>
-		
-		<input type="submit" name="back" value="修正" />
-		<input type="submit" name="next"value="登録" />
-		
-	</form>
-	
+    <form method="post" th:action="@{/Team7_fromPlanConfirm}" th:object="${team7CalenderForm}">
 
+        <p th:text="'日付：' + *{data}"></p>
+        <p th:text="'予定名：' + *{sche}"></p>
+        <p th:text="'詳細：' + *{detail}"></p>
+
+        <!-- 値をhiddenで送信してセッションに保持させる -->
+        <input type="hidden" th:field="*{data}" />
+        <input type="hidden" th:field="*{sche}" />
+        <input type="hidden" th:field="*{detail}" />
+
+        <input type="submit" name="back" value="修正" />
+        <input type="submit" name="next" value="登録" />
+
+    </form>
 </body>
 </html>

@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.ofg">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>登録完了</title>
 </head>
 <body>
-	<h3>登録完了</h3>
+    <h3>登録完了</h3>
 
-		<th:block th:object="${team7CalenderForm}">
-		<p th:text="日付：+ *{data}"></p>
-		<p th:text="予定名：+ *{sche}"></p>
-		<p th:text="詳細：+ *{detail}"></p>
-		</th:block>
+    <th:block th:object="${team7CalenderForm}">
+        <p th:text="'日付：' + *{data}"></p>
+        <p th:text="'予定名：' + *{sche}"></p>
+        <p th:text="'詳細：' + *{detail}"></p>
+    </th:block>
 	
+	<form action="/Team7_fromfinal" method="post">
+	 <button type="submit" name="back">← カレンダーに戻る</button>
+	    </form>
+	
+	
+
 </body>
 </html>
