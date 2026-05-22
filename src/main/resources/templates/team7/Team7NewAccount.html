@@ -9,15 +9,19 @@
 	<h2>新規登録</h2>
 	
 	<p th:text="${error}"></p>
-	<form method="post" th:action="@{/Team7_fromNewAccount}">
+	<form method="post" th:action="@{/Team7_fromNewAccount}" th:object="${team7NewAccountForm}">
 	        <div>
 	            ユーザーID：
-	            <input type="text" name="userCd" >
+	            <input type="text" th:field="*{userCd}" >
+				<br>
+				<th:block th:if="${#fields.hasErrors('userCd')}" th:errors="*{userCd}"></th:block>
 	        </div>
 	        <br>
 	        <div>
 	            パスワード：
-	            <input type="password" name="userPw">
+	            <input type="text" th:field="*{userPw}">
+				<br>
+				<th:block th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></th:block>
 	        </div>
 	        <br>
 	        <button type="submit" name="make">新規アカウント登録</button>

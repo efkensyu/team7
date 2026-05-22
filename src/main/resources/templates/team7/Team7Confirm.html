@@ -8,15 +8,15 @@
 <body>
 	<form method="post" th:action="@{/Team7_fromConfirm}"th:object="${team7NewAccountForm}" >
 		
-		<th:block th:object="${team7NewAccountForm}">
-		<p th:text="IDは + *{userCd}"></p>
-		<p th:text="パスワードは + *{userPw}"></p>	
+		<input type="hidden" th:field="*{userCd}">
+		<input type="hidden" th:field="*{userPw}">
+		
+		<p th:text="'IDは ' + *{userCd}"></p>
+		<p th:text="'パスワードは ' + *{userPw}"></p>
 		<h5>間違いないですか？</h5>
 		
 		<input type="submit" name ="back" value="修正" />
 		<input type="submit" name = "Confirm" value="送信" />
-		
-		</th:block>
 		
 	</form>
 		

@@ -3,10 +3,11 @@ package com.example.demo.team7;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.demo.team7.MakeAccount.Team7Form;
@@ -34,7 +35,15 @@ public class Team7LoginController {
 	}
 	
 	@PostMapping(value = "/Team7_fromLogin",params = "login") 
-	public String checker(@RequestParam("userCd") String userCd, @RequestParam("userPw") String userPw, Model model) {
+	public String checker(@Validated @ModelAttribute("Team7AccountForm") Team7Form form, BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			return "team7/Team7Login";
+		}
+		
+		String userCd = form.getUserCd();
+        String userPw = form.getUserPw();
+		
 		boolean check = loginService.loginCheck(userCd, userPw);
 		
 		if (!check) {

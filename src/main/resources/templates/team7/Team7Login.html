@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.ofg">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -8,16 +8,22 @@
 	
 	<h2>ログイン画面</h2>
 	
-	<form method="post" th:action="@{/Team7_fromLogin}">
+	<div th:if="${error}" th:text="${error}"></div>
+	
+	<form method="post" th:action="@{/Team7_fromLogin}" th:object="${Team7AccountForm}">
 	        <div>
 	            ユーザーID：
-	            <input type="text" name="userCd" >
+	            <input type="text" th:field="*{userCd}">
+				<br>
+				<th:block th:if="${#fields.hasErrors('userCd')}" th:errors="*{userCd}"></th:block>
 	        </div>
 	        <br>
 	        <div>
 	            パスワード：
-	            <input type="password" name="userPw">
-	        </div>
+	            <input type="password" th:field="*{userPw}">
+				<br>
+				<th:block th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></th:block>
+			</div>
 	        <br>
 	        <button type="submit" name="login">ログイン</button>
 	        <button type="submit" name="make" value="true">新規アカウント作成</button>
