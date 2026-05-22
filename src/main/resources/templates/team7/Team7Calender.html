@@ -31,14 +31,13 @@
 				<td th:each="dayOfWeek : ${#numbers.sequence(0,6)}"
 					th:with="cellIndex=${(week -1) * 7 +dayOfWeek},
 							 dateNum=${cellIndex - firstDayOfWeek + 1}">
-					<input type="checkbox" th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:value="${dateNum}" name="day">
-					<th:block th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:text="${dateNum}"></th:block>
+					<input class="cal" type="checkbox" th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:value="${dateNum}" name="day">
+					<th:block class="box" th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:text="${dateNum}"></th:block>
 				</td>
 			</tr>	
 		</table>
 		</div>
 		<input type="submit" name="print" value="詳細表示" />
 	</form>
-
 </body>
 </html>
