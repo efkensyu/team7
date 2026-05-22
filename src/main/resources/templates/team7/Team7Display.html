@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -19,28 +18,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="s : ${Team7CalenderEntity}">
+            <tr th:each="s : ${schedules}">  <!-- ← schedulesに修正 -->
                 <td th:text="${s.yoteiCd}"></td>
                 <td th:text="${s.yoteiNm}"></td>
                 <td th:text="${s.yoteiDetail}"></td>
                 <td th:text="${s.userId}"></td>
+                <!-- 削除ボタンは行ごとに配置 -->
+                <td>
+                    <form action="/Team7_fromDisplay" method="post">
+                        <input type="hidden" name="year"    th:value="${year}" />
+                        <input type="hidden" name="month"   th:value="${month}" />
+                        <input type="hidden" name="day"     th:value="${day}" />
+                        <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}" />
+                        <button type="submit" name="confirm">🗑 削除</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
 
-    <!-- ボタンエリア -->
-    <div class="btn-area">
-        <!-- カレンダーに戻るボタン -->
-        <input type="submit" th:action="@{/Team7_fromDisplay}" name="backCalender" value="← カレンダーに戻る">
-
-        <!-- 削除画面へのボタン（予定IDをPOSTで送る） -->
-		<form action="/Team7_fromDisplay" method="post">
-		     <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
-		     <button type="submit" name="confirm"value="削除"></button>
-            <input type="hidden" name="yoteiCd" th:value="${s.yoteiCd}"/>
-            <button type="submit" value="🗑 予定を削除する"></button>
-  		</form>			
-	  </div>
+    <!-- カレンダーに戻るボタン（別フォーム） -->
+    <form action="/Team7_fromDisplay" method="post">
+        <input type="hidden" name="year"  th:value="${year}" />
+        <input type="hidden" name="month" th:value="${month}" />
+        <input type="hidden" name="day"   th:value="${day}" />
+        <button type="submit" name="backCalender">← カレンダーに戻る</button>
+    </form>
 
 </body>
 </html>
