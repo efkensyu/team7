@@ -7,7 +7,7 @@
 <body>
 	<!--たつざわ-->
 	<h2>予定追加</h2>
-	<form method="post" th:action="@{/Team7_fromPlanAdd}"th:object="${Team7CalenderForm}">
+	<form method="post" th:action="@{/Team7_fromPlanAdd}"th:object="${team7CalenderForm}">
 		<p>日付</p>
 		<input type="date" th:field="*{data}">
 		<br>

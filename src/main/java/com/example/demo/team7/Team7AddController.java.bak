@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.demo.team7.entity.Team7CalenderEntity;
+import com.example.demo.team7.MakeAccount.Team7CalenderForm;
 
 @Controller
 @SessionAttributes(types=Team7CalenderForm.class)
 public class Team7AddController {
 	@ModelAttribute("team7CalenderForm")
-	public Team7CalenderEntity setUpTeam7CalenderForm() {
+	public Team7CalenderForm setUpTeam7CalenderForm() {
 		return new Team7CalenderForm();
 	}
 	
