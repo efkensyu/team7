@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<form method="post"th:action="@{/Team7_fromConfirm}"  th:object="${team7CalenderForm}">
+	<form method="post"th:action="@{/Team7_fromPlanConfirm}"  th:object="${team7CalenderForm}">
 		
 		<p th:text="日付：+ *{data}"></p>
 		<p th:text="予定名：+ *{sche}"></p>
