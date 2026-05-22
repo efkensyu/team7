@@ -1,0 +1,51 @@
+package com.example.demo.team7;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import com.example.demo.team7.entity.Team7CalenderEntity;
+
+@Controller
+@SessionAttributes(types=Team7CalenderForm.class)
+public class Team7AddController {
+	@ModelAttribute("team7CalenderForm")
+	public Team7CalenderEntity setUpTeam7CalenderForm() {
+		return new Team7CalenderForm();
+	}
+	
+	//予定追加画面に行く
+	@GetMapping("/Team7PlanAdd")
+	public String add() {
+		return "team7/Team7PlanAdd";
+	}
+
+	
+	//予定追加画面から確認の画面に行く
+	@PostMapping(value="/Team7_fromPlanAdd", params="confilm")
+		public String planconfilm() {
+		return "team7/Team7PlanConfirm";
+	}
+	
+	//予定追加画面からカレンダーに戻る
+	@PostMapping(value="/Team7_fromPlanAdd", params="back")
+		public String planback() {
+		return "redirect:/Team7Calender";
+	}
+	
+	//追加確認画面から追加完了画面に行く(予定の確定)
+	@PostMapping(value="/Team7_fromPlanConfirm", params="confilm")
+		public String planfinal() {
+		return "team7/Team7Final";
+	}
+	
+	//追加完了画面からカレンダー画面に戻る（セッションを消す）
+	@PostMapping(value="/Team7_fromfinal", params="back")
+	public String calenderback(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "redirect:/Team7Calender";
+	}
+}

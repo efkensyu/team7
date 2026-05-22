@@ -1,5 +1,5 @@
 table{
-	border-style: dotted;	
+	border-style: solid;
 }
 
 th.red {
@@ -7,4 +7,8 @@ th.red {
 }
 th.sat {
 	color: blue;
+}
+
+.cal:checked{ 
+	background-color: pink;
 }

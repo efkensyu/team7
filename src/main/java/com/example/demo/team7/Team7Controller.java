@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.demo.team7.MakeAccount.Team7Form;
+import com.example.demo.team7.entity.Team7Account;
 import com.example.demo.team7.entity.Team7CalenderEntity;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@SessionAttributes(types = Team7Form.class)
+@SessionAttributes(types = Team7Account.class)
 @RequiredArgsConstructor
 
 public class Team7Controller {
@@ -73,7 +74,7 @@ public class Team7Controller {
 	//カレンダーから予定追加の画面に行く
 	@PostMapping(value="/Team7_fromCalender", params="add")
 		public String add() {
-		return "team7/Team7PlanAdd";
+		return "redirect:/Team7PlanAdd";
 	}
 	
 	//カレンダーから予定の詳細表示の画面に行く
@@ -98,24 +99,6 @@ public class Team7Controller {
 	    }
 
 	    return "team7/Team7Display";
-	}
-	
-	//予定追加画面から確認の画面に行く
-	@PostMapping(value="/Team7_fromPlanAdd", params="confilm")
-		public String planconfilm() {
-		return "team7/Team7Confirm";
-	}
-	
-	//予定追加画面からカレンダーに戻る
-	@PostMapping(value="/Team7_fromPlanAdd", params="back")
-		public String planback() {
-		return "redirect:/Team7Calender";
-	}
-	
-	//追加確認画面からカレンダーに戻る(予定の確定)
-	@PostMapping(value="/Team7_fromPlanConfirm", params="confilm")
-		public String calenderback() {
-		return "team7/Team7Calender";
 	}
 	
 	//詳細表示からカレンダーに戻る
