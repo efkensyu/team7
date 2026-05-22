@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.ofg">
 <head>
-	
 <meta charset="UTF-8">
-<title>追加確認</title>
+<title>Insert title here</title>
 </head>
-
 <body>
-	<form method="post"th:action="@{/Team7_fromConfirm}"  th:object="${team7CalenderForm}">
-		
+	<h3>登録完了</h3>
+
+		<th:block th:object="${Team7CalenderForm}">
 		<p th:text="日付：+ *{data}"></p>
 		<p th:text="予定名：+ *{sche}"></p>
 		<p th:text="詳細：+ *{detail}"></p>
+		</th:block>
 		
-		<input type="submit" name="back" value="修正" />
-		<input type="submit" name="next"value="登録" />
-		
-	</form>
-	
 
 </body>
 </html>
