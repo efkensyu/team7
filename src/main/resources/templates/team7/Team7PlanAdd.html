@@ -7,16 +7,17 @@
 <body>
 	<!--たつざわ-->
 	<h2>予定追加</h2>
-	<form method="post" th:action="@{/Team7_fromPlanAdd}">
+	<form method="post" th:action="@{/Team7_fromPlanAdd}"th:object="${Team7CalenderForm}">
 		<p>日付</p>
-		<input type="date">
+		<input type="date" th:field="*{data}">
 		<br>
 		<p>予定を入力</p>
-		<input type="text" />
+		<input type="text" th:field="*{sche}" />
 		<br>
 		<p>予定の詳細を入力</p>
-		<textarea name="textarea1" rows="5" cols="20"></textarea>
+		<textarea name="textarea1" rows="5" cols="20" th:field="*{detail}"></textarea>
 		<br>
+		
 		
 		<!--カレンダーに戻る-->
 		<input type="submit" name="back" value="カレンダーに戻る" />
