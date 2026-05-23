@@ -3,6 +3,7 @@ package com.example.demo.team7;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.example.demo.team7.MakeAccount.Team7Form;
 import com.example.demo.team7.entity.Team7Account;
 import com.example.demo.team7.entity.Team7CalenderEntity;
+import com.example.demo.team7.service.Team7CalenderService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,20 +26,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 
 public class Team7Controller {
-
     private final Team7displayService service;
-
+	private final Team7CalenderService service2;
     
 	@ModelAttribute("Team7NewAccountForm")
 	public Team7Form setupTeam7NewAccountForm() {
 		return new Team7Form();
 		
 	}
+
 	//カレンダー画面に飛ばす
 	@GetMapping("/Team7Calender")
-	 public String calender(
-			 
-			 Model model) {
+	 public String calender(Model model) {
 		
 		//今日の日付を取得
 		LocalDate today = LocalDate.now();
@@ -48,13 +48,23 @@ public class Team7Controller {
 		LocalDate nextMon = firstDay.plusMonths(1);
 		
 		//月の始めの曜日を取得し、日曜なら0にする
-		int firstDayOfWeek = firstDay.getDayOfWeek().getValue();
-		if (firstDayOfWeek == 7) {
-			firstDayOfWeek = 0;
+		int firstDayOfMonth = firstDay.getDayOfWeek().getValue();
+		if (firstDayOfMonth == 7) {
+			firstDayOfMonth = 0;
 		}
 		
 		//月の日数を取得
 		int daysInMonth = firstDay.lengthOfMonth();
+		
+		//その日の予定の件数を取得
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		List<Long> countList = new ArrayList<>();
+		for (int i=1; i <= daysInMonth; i++) {
+			LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
+			String countDay = days.format(format);
+			long count = service2.countYoteiDt(countDay);
+			countList.add(count);
+		}
 		
 		
 		model.addAttribute("year", today.getYear());
@@ -64,8 +74,11 @@ public class Team7Controller {
 		model.addAttribute("prevMonth",prevMon.getMonthValue());
 		model.addAttribute("nextYear", nextMon.getYear());
 		model.addAttribute("nextMon", nextMon.getMonthValue());
-		model.addAttribute("firstDayOfWeek",firstDayOfWeek);
+		model.addAttribute("firstDayOfMonth",firstDayOfMonth);
 		model.addAttribute("daysInMonth",daysInMonth);
+		
+		model.addAttribute("countDays",countList);
+		
 		return "team7/Team7Calender";
 	}	
 

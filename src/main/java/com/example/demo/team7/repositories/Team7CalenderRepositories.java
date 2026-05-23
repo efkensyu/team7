@@ -13,6 +13,6 @@ public interface Team7CalenderRepositories extends JpaRepository<Team7CalenderEn
 	
 	public List<Team7CalenderEntity> findByYoteiDt(LocalDate date);
 	
-	public List<Team7CalenderEntity> countByYoteiDt(LocalDate date);
+	public long countByYoteiDt(LocalDate date);
 
 }

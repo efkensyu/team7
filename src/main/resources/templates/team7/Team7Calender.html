@@ -7,7 +7,7 @@
 </head>
 <body>
 	<!--たつざわ-->
-	<h2>カレンダー</h2>
+	<h2><th:block th:text="${year}">年<th:block th:text="${month}">月のカレンダー</h2>
 	<form method="post" th:action="@{/Team7_fromCalender}">
 		<input type="submit" name="add" value="予定追加" />
 		
@@ -29,10 +29,11 @@
 			</tr>
 			<tr th:each="week : ${#numbers.sequence(1,6)}">
 				<td th:each="dayOfWeek : ${#numbers.sequence(0,6)}"
-					th:with="cellIndex=${(week -1) * 7 +dayOfWeek},
-							 dateNum=${cellIndex - firstDayOfWeek + 1}">
-					<input class="cal" type="checkbox" th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:value="${dateNum}" name="day">
-					<th:block class="box" th:if="${cellIndex >= firstDayOfWeek and dateNum <= daysInMonth}" th:text="${dateNum}"></th:block>
+					th:with="yotei, cellIndex=${countDays},
+							 dateNum=${cellIndex.index - firstDayOfMonth + 1}">
+					<input class="cal" type="checkbox" th:if="${cellIndex.index >= firstDayOfMonth and dateNum <= daysInMonth}" th:value="${dateNum}" name="day">
+					<th:block class="box" th:if="${cellIndex.index >= firstDayOfMonth and dateNum <= daysInMonth}" th:text="${dateNum}"></th:block>
+					<th:block th:if="${cellIndex.index >= firstDayOfMonth and dateNum <= daysInMonth}" th:text="${yotei}"></th:block>
 				</td>
 			</tr>	
 		</table>
