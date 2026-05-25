@@ -8,7 +8,7 @@
 <body>
 	<!--たつざわ-->
 	<h2><th:block th:text="${year}"></th:block>年<th:block th:text="${month}"></th:block>月のカレンダー</h2>
-	<p th:text="ユーザー + ${user}"></p>
+	<p th:text="ユーザー名 + ${user}"></p>
 	<form method="post" th:action="@{/Team7_fromCalender}">
 		<input type="submit" name="add" value="予定追加" />
 		

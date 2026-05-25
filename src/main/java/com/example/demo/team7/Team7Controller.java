@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.demo.team7.MakeAccount.Team7CalenderForm;
 import com.example.demo.team7.MakeAccount.Team7Form;
 import com.example.demo.team7.entity.Team7Account;
 import com.example.demo.team7.entity.Team7CalenderEntity;
@@ -22,7 +23,7 @@ import com.example.demo.team7.service.Team7CalenderService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@SessionAttributes(types = Team7Account.class)
+@SessionAttributes(types = {Team7Account.class, Team7CalenderEntity.class})
 @RequiredArgsConstructor
 
 public class Team7Controller {
@@ -32,6 +33,12 @@ public class Team7Controller {
 	@ModelAttribute("Team7NewAccountForm")
 	public Team7Form setupTeam7NewAccountForm() {
 		return new Team7Form();
+		
+	}
+	
+	@ModelAttribute("Team7CalenderForm")
+	public Team7CalenderForm setupTeam7CalenderForm() {
+		return new Team7CalenderForm();
 		
 	}
 
@@ -100,30 +107,43 @@ public class Team7Controller {
 	//たつざわ
 	//カレンダーから予定追加の画面に行く
 	@PostMapping(value="/Team7_fromCalender", params="add")
-		public String add() {
+	public String add(@ModelAttribute("Team7AccountForm") Team7Form form, Model model) {
+		//ユーザーIDの取得
+		String userId = form.getUserCd();
+		System.out.println(userId);
+		
+		model.addAttribute("userId",userId);
+		model.addAttribute("Team7AcconuntForm", form);
+		
 		return "redirect:/Team7PlanAdd";
 	}
 	
 	//カレンダーから予定の詳細表示の画面に行く
 	@PostMapping(value="/Team7_fromCalender", params="print")
-	public String display(
-	        @RequestParam("year")  int year,
-	        @RequestParam("month") int month,
-	        @RequestParam("day")   int day,
+	public String display(@ModelAttribute("Team7AccountForm") Team7Form form,
+			@ModelAttribute("Team7Calender") Team7CalenderForm calform,
+			@RequestParam("day") int[] day,
 	        Model model) {
-
-	    try {
-//	        String dateStr = year + "/" + month + "/" + day;
-	        DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/M/d");
-	        LocalDate dateLd = LocalDate.parse(year + "/" + month + "/" + day ,date);
-	        List<Team7CalenderEntity> schedules = service.getTeam7CalenderEntityByDate(dateLd);
-	        model.addAttribute("schedules", schedules);
-	        model.addAttribute("year", year);
-	        model.addAttribute("month", month);
-	        model.addAttribute("day", day);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		
+		//ユーザーIDの取得
+		String userId = form.getUserCd();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		LocalDate today = LocalDate.now();
+		
+		List<Team7CalenderEntity> yoteiList = new ArrayList<>();
+		
+		for (int i: day) {
+			LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
+			String countDay = days.format(format);
+			yoteiList =  service2.findByUserIdAndYoteiDt(userId, countDay);
+		}
+	    
+		model.addAttribute("year",today.getYear());
+		model.addAttribute("month",today.getMonthValue());
+		model.addAttribute("day",day);
+		model.addAttribute("userId",userId);
+		model.addAttribute("yoteiList",yoteiList);
 
 	    return "team7/Team7Display";
 	}
@@ -131,7 +151,7 @@ public class Team7Controller {
 	//詳細表示からカレンダーに戻る
 	@PostMapping(value="/Team7_fromDisplay", params="backCalender")
 		public String backcal() {
-		return "team7/Team7Calender";
+		return "redirect:/Team7Calender";
 	}
 	
 	//詳細表示から削除確認画面に行く
