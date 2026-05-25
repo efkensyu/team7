@@ -25,7 +25,7 @@ public class Team7CalenderEntity {
 	private String yoteiNm;  //予定の名前
 	@Size(max=300,message="予定名は300文字以内にしてください")
 	private String yoteiDetail;  //予定の詳細
-	private Integer userId;  //ユーザーID
+	private String userId;  //ユーザーID
 	@NotBlank(message="日付を入力してください")
 	private LocalDate yoteiDt; //日付
 
