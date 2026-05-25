@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.ofg">
 <head>
 <meta charset="UTF-8">
-<link rel = "stylesheet" type="text/css" href="Team7Css.css">
+<link rel = "stylesheet" type="text/css" href="team7/Team7Calender.css">
 <title>カレンダー表示</title>
 </head>
 <body>
@@ -11,10 +11,8 @@
 	<form method="post" th:action="@{/Team7_fromCalender}">
 		<input type="submit" name="add" value="予定追加" />
 		
-		<div>
-			<a href="@{/team7/Team7Calender(year=${prevYear},month=${prevMonth})}">前の月</a>
-			<a href="@{/team7/Team7Calender(year=${nextYear},month=${nextMonth})}">次の月</a>
-		</div>
+		<a th:href="@{/Team7Calender(year=${prevYear},month=${prevMonth})}">前の月</a>
+		<a th:href="@{/Team7Calender(year=${nextYear},month=${nextMon})}">次の月</a>
 		
 		<div>
 		<table border="1">
@@ -33,7 +31,7 @@
 							dateNum=${cellIndex - firstDayOfMonth + 1}">
 					<input class="cal" type="checkbox" th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth}" th:value="${dateNum}" name="day">
 					<th:block class="box" th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth}" th:text="${dateNum}"></th:block>
-					<th:block th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth and dateNum >= 1 and dateNum < countList[daysInMonth]}" th:text="予定 +${countList[dateNum]} +件"></th:block>
+					<p th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth}" th:text="予定 +${countList} +件"></p>
 				</td>
 			</tr>	
 		</table>

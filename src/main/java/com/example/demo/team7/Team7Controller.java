@@ -35,12 +35,22 @@ public class Team7Controller {
 		
 	}
 
-	//カレンダー画面に飛ばす
+	//カレンダー画面（初期値）
 	@GetMapping("/Team7Calender")
-	 public String calender(Model model) {
+	public String Initial(Model model) {
+		LocalDate today = LocalDate.now();
+		return "redirect:/Team7Calender?year=" + today.getYear() + "&month=" + today.getMonthValue();
+	}
+	
+	
+	//カレンダー画面に飛ばす
+	@GetMapping(value="/Team7Calender", params= {"year","month"})
+	 public String calender(@RequestParam("year") int year,
+			 				@RequestParam("month") int month,
+			 				Model model) {
 		
 		//今日の日付を取得
-		LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.of(year,month,LocalDate.now().getDayOfMonth());
 		
 		//前月・次月の計算
 		LocalDate firstDay = LocalDate.of(today.getYear(),today.getMonthValue(),1);
