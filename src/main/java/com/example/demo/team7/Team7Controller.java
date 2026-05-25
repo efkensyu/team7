@@ -45,11 +45,15 @@ public class Team7Controller {
 	
 	//カレンダー画面に飛ばす
 	@GetMapping(value="/Team7Calender", params= {"year","month"})
-	 public String calender(@RequestParam("year") int year,
+	 public String calender(@ModelAttribute("Team7AccountForm") Team7Form form,
+			 				@RequestParam("year") int year,
 			 				@RequestParam("month") int month,
 			 				Model model) {
 		
-		//今日の日付を取得
+		//ユーザーIDの取得
+		String userId = form.getUserCd();
+		
+		//渡された年と月の日付を取得(初期値は今日の日付)
 		LocalDate today = LocalDate.of(year,month,LocalDate.now().getDayOfMonth());
 		
 		//前月・次月の計算
@@ -72,7 +76,7 @@ public class Team7Controller {
 		for (int i=1; i <= daysInMonth; i++) {
 			LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
 			String countDay = days.format(format);
-			long count = service2.countYoteiDt(countDay);
+			long count = service2.countByUserIdAndYoteiDt(userId,countDay);
 			countList.add(count);
 		}
 		
@@ -87,6 +91,7 @@ public class Team7Controller {
 		model.addAttribute("daysInMonth",daysInMonth);
 		
 		model.addAttribute("countDays",countList);
+		model.addAttribute("user",userId);
 		
 		return "team7/Team7Calender";
 	}	

@@ -27,6 +27,15 @@ public class Team7CalenderService {
 		return repository.countByYoteiDt(day);
 	}
 	
+	public List<Team7CalenderEntity> findByUserId(String userCd) {
+		return repository.findByUserId(userCd);
+	}
+	
+	public long countByUserIdAndYoteiDt(String user, String date){
+		LocalDate day = LocalDate.parse(date);
+		return repository.countByUserIdAndYoteiDt(user,day);
+	}
+	
 	//予定の詳細が入っていた場合
 	@Transactional
 	public Team7CalenderEntity insertYotei(String date, String yoteiNm, String yoteiDetail) {
