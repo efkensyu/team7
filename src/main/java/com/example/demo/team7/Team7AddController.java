@@ -5,15 +5,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.team7.MakeAccount.Team7CalenderForm;
 import com.example.demo.team7.MakeAccount.Team7Form;
+import com.example.demo.team7.service.Team7CalenderAddService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
-@SessionAttributes(types = Team7CalenderForm.class)
+@SessionAttributes(names = {"team7CalenderForm", "Team7AccountForm"})
 public class Team7AddController {
+	
+	private final Team7CalenderAddService calenderAddService;
 
     @ModelAttribute("team7CalenderForm")
     public Team7CalenderForm setUpTeam7CalenderForm() {
@@ -21,7 +27,7 @@ public class Team7AddController {
     }
 
     @GetMapping("/Team7PlanAdd")
-    public String add(@ModelAttribute("Team7AccountForm") Team7Form accountForm, Model model) {
+    public String add(@SessionAttribute("Team7AccountForm") Team7Form accountForm, Model model) {
     	
     	 String userCd = accountForm.getUserCd();
 
@@ -51,16 +57,27 @@ public class Team7AddController {
     }
 
     @PostMapping(value = "/Team7_fromPlanConfirm", params = "next")
-    public String planfinal(@ModelAttribute Team7CalenderForm form, Model model) {
+    public String planfinal(
+            @ModelAttribute("team7CalenderForm") Team7CalenderForm form,
+            @SessionAttribute("Team7AccountForm") Team7Form accountForm,
+            Model model) {
+
         System.out.println("★ final: data=" + form.getData());
-        model.addAttribute("team7CalenderForm", form);
+
+        String userId = accountForm.getUserCd();
+
+        calenderAddService.add(
+                userId,
+                form.getData(),
+                form.getSche(),
+                form.getDetail());
+
         return "team7/Team7Final";
     }
 
     @PostMapping(value = "/Team7_fromfinal", params = "back")
-    public String calenderback(@ModelAttribute Team7CalenderForm form,
-                                SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
+    public String calenderback(@ModelAttribute Team7CalenderForm form) {
+
         return "redirect:/Team7Calender";
     }
 }
