@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.team7.MakeAccount.Team7CalenderForm;
+import com.example.demo.team7.MakeAccount.Team7Form;
 
 @Controller
 @SessionAttributes(types = Team7CalenderForm.class)
@@ -20,7 +21,14 @@ public class Team7AddController {
     }
 
     @GetMapping("/Team7PlanAdd")
-    public String add() {
+    public String add(@ModelAttribute("Team7AccountForm") Team7Form accountForm, Model model) {
+    	
+    	 String userCd = accountForm.getUserCd();
+
+    	    System.out.println(userCd);
+
+    	    model.addAttribute("userId", userCd);
+
         return "team7/Team7PlanAdd";
     }
 
