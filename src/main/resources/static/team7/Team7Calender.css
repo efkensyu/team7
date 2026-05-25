@@ -1,0 +1,199 @@
+/* ============================================================
+   カレンダー表示 CSS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CSS変数
+   ------------------------------------------------------------ */
+:root {
+  --color-primary:        #001489;
+  --color-accent:         #ffd1e6;
+  --color-bg:             #f0f4f9;
+  --color-white:          #ffffff;
+  --color-text:           #1a3a5c;
+  --color-sunday:         #e74c3c;
+  --color-saturday:       #4a90d9;
+
+  --font-family:          'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-size-base:       1rem;
+  --font-size-h2:         1.5rem;
+  --font-weight-heading:  700;
+
+  --form-max-width:       620px;
+  --shadow-card:          0 4px 24px rgba(26, 58, 92, 0.12);
+  --transition:           0.2s ease;
+}
+
+/* ------------------------------------------------------------
+   2. ページ全体
+   ------------------------------------------------------------ */
+body {
+  margin: 0;
+  padding: 24px 16px;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   3. 見出し h2
+   ------------------------------------------------------------ */
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary);
+  margin: 0 0 8px 0;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   4. フォーム
+   ------------------------------------------------------------ */
+form {
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  padding: 24px 32px;
+  width: 100%;
+  max-width: var(--form-max-width);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ------------------------------------------------------------
+   5. 前の月・次の月リンク行
+   ------------------------------------------------------------ */
+form > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form > div:first-of-type a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  transition: background-color var(--transition);
+}
+
+form > div:first-of-type a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ------------------------------------------------------------
+   6. テーブル
+   ------------------------------------------------------------ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+/* ------------------------------------------------------------
+   7. 曜日見出し行
+   ------------------------------------------------------------ */
+table tr:first-child th {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 8px 0;
+  text-align: center;
+  border: none;
+}
+
+th.red {
+  color: rgba(231, 76, 60, 0.9) !important;
+}
+
+th.sat {
+  color: rgba(74, 144, 217, 0.9) !important;
+}
+
+/* ------------------------------------------------------------
+   8. 日付セル
+   ------------------------------------------------------------ */
+td {
+  text-align: center;
+  padding: 6px 4px;
+  border: none;
+  color: var(--color-white);
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* 日曜列（1列目） */
+td:nth-child(1) {
+  color: rgba(231, 76, 60, 0.85);
+}
+
+/* 土曜列（7列目） */
+td:nth-child(7) {
+  color: rgba(74, 144, 217, 0.85);
+}
+
+/* ------------------------------------------------------------
+   9. チェックボックス
+   ------------------------------------------------------------ */
+input[type="checkbox"] {
+  display: block;
+  margin: 0 auto 2px;
+  accent-color: var(--color-accent);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   10. ボタン共通
+   ------------------------------------------------------------ */
+input[type="submit"] {
+  width: 100%;
+  padding: 12px 24px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+  letter-spacing: 0.04em;
+}
+
+input[type="submit"]:hover {
+  transform: translateY(-1px);
+}
+
+/* 予定追加ボタン */
+input[name="add"] {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+input[name="add"]:hover {
+  background-color:hotpink;
+}
+
+/* 詳細表示ボタン */
+input[name="print"] {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}
+
+input[name="print"]:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
