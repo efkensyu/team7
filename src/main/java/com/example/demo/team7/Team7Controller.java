@@ -53,6 +53,7 @@ public class Team7Controller {
 	//カレンダー画面に飛ばす
 	@GetMapping(value="/Team7Calender", params= {"year","month"})
 	 public String calender(@ModelAttribute("Team7AccountForm") Team7Form form,
+			 				@ModelAttribute("Team7CalenderForm") Team7CalenderForm calform,
 			 				@RequestParam("year") int year,
 			 				@RequestParam("month") int month,
 			 				Model model) {
@@ -121,7 +122,7 @@ public class Team7Controller {
 	//カレンダーから予定の詳細表示の画面に行く
 	@PostMapping(value="/Team7_fromCalender", params="print")
 	public String display(@ModelAttribute("Team7AccountForm") Team7Form form,
-			@ModelAttribute("Team7Calender") Team7CalenderForm calform,
+			@ModelAttribute("Team7CalenderForm") Team7CalenderForm calform,
 			@RequestParam("day") int[] day,
 	        Model model) {
 		
@@ -130,18 +131,19 @@ public class Team7Controller {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		LocalDate today = LocalDate.now();
+		ArrayList<String> countDay = new ArrayList<>();
 		
 		List<Team7CalenderEntity> yoteiList = new ArrayList<>();
 		
 		for (int i: day) {
 			LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
-			String countDay = days.format(format);
-			yoteiList =  service2.findByUserIdAndYoteiDt(userId, countDay);
+			countDay.add(days.format(format));
 		}
-	    
-		model.addAttribute("year",today.getYear());
-		model.addAttribute("month",today.getMonthValue());
-		model.addAttribute("day",day);
+		for (String cD:countDay) {
+			yoteiList =  service2.findByUserIdAndYoteiDt(userId, cD);
+		}
+		
+		model.addAttribute("countDay",countDay);
 		model.addAttribute("userId",userId);
 		model.addAttribute("yoteiList",yoteiList);
 
@@ -150,7 +152,9 @@ public class Team7Controller {
 	
 	//詳細表示からカレンダーに戻る
 	@PostMapping(value="/Team7_fromDisplay", params="backCalender")
-		public String backcal() {
+		public String backcal(@ModelAttribute("Team7AccountForm") Team7Form form) {
+		//ユーザーIDの取得
+		String userId = form.getUserCd();
 		return "redirect:/Team7Calender";
 	}
 	
