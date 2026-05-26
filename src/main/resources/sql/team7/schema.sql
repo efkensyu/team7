@@ -1,2 +1,2 @@
-ALTER TABLE yotei_tbl
+ALTER TABLE team7_yotei_tbl
 MODIFY yotei_cd INT NOT NULL AUTO_INCREMENT;

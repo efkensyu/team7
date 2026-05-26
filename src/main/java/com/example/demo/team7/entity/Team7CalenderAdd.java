@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="yotei_tbl")
+@Table(name="team7_yotei_tbl")
 public class Team7CalenderAdd {
 	
 	@Id

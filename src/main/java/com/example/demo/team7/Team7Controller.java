@@ -68,6 +68,7 @@ public class Team7Controller {
 		LocalDate firstDay = LocalDate.of(today.getYear(),today.getMonthValue(),1);
 		LocalDate prevMon = firstDay.minusMonths(1);
 		LocalDate nextMon = firstDay.plusMonths(1);
+
 		
 		//月の始めの曜日を取得し、日曜なら0にする(2026年5月なら金曜なので5)
 		int firstDayOfMonth = firstDay.getDayOfWeek().getValue();
