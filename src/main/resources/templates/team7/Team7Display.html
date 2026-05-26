@@ -10,29 +10,27 @@
 	<h2 th:text="${userId} + の予定一覧"></h2>
 
     <!-- 予定一覧テーブル -->
+	<form th:action="@{/Team7_fromDisplay}" method="post">
     <table>
 		<tr>
 			<th>予定ID</th>
 			<th>日付</th>
 			<th>予定名</th>
 			<th>詳細</th>
-			<th>ユーザーID</th>
 			<th>削除</th>
 		</tr>
-        <tr th:each="d : ${yoteiList}">
+        <tr th:each="d,stat : ${yoteiList}">
 			<td th:text="${d.yoteiCd}"></td>
 			<td th:text="${d.yoteiDt}"></td>
 			<td th:text="${d.yoteiNm}"></td>
 			<td th:text="${d.yoteiDetail}"></td>
-			<td th:text="${d.userId}"></td>
                 <!-- 削除ボタンは行ごとに配置 -->
-			<td>
-				<form th:action="@{/Team7_fromDisplay}" method="post">
-                        <button type="submit" name="confirm">削除</button>
-                    </form>
-                </td>
-            </tr>
+			<td><button type="submit" th:value="${d.yoteiCd}" name="confirm">削除</button>
+			</td>
+		
+		</tr>
     </table>
+	</form>
 	<form method="post" th:action="@{/Team7_fromDisplay}" >
     <input type="submit" name="backCalender" value="← カレンダーに戻る" />
 	</form>

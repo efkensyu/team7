@@ -136,20 +136,17 @@ public class Team7Controller {
 			String userId = form.getUserCd();
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
-			LocalDate today = LocalDate.of(year,month,LocalDate.now().getDayOfMonth());
 			ArrayList<String> countDay = new ArrayList<>();
 			
 			List<Team7CalenderEntity> yoteiList = new ArrayList<>();
 			
 			for (int i: day) {
-				LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
+				LocalDate days = LocalDate.of(year, month, i);
 				countDay.add(days.format(format));
 			}
 			for (String cD:countDay) {
 				yoteiList = service2.findByUserIdAndYoteiDt(userId, cD);
 			}
-		System.out.println(countDay);
-		System.out.println(yoteiList.get(0));
 		
 		model.addAttribute("countDay",countDay);
 		model.addAttribute("userId",userId);
@@ -169,7 +166,20 @@ public class Team7Controller {
 	
 	//詳細表示から削除確認画面に行く
 	@PostMapping(value="/Team7_fromDisplay", params="confirm")
-		public String delete() {
+		public String delete(@ModelAttribute("Team7AccountForm") Team7Form form,
+				@ModelAttribute("Team7CalenderForm") Team7CalenderForm calform,
+				@RequestParam("confirm") String yoteiCd,
+				Model model) {
+		
+		//ユーザーIDの取得
+		String userId = form.getUserCd();
+		
+		List<Team7CalenderEntity> yotei;
+		yotei = service2.findByYoteiCd(yoteiCd);
+		System.out.println(yotei);
+		
+		model.addAttribute("CalenderEntity",yotei);
+
 		return "redirect:/Team7Delete";
 	}
 	
