@@ -1,0 +1,196 @@
+/* ============================================================
+   予定追加フォーム CSS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   0. リセット
+   ------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   1. CSS変数
+   ------------------------------------------------------------ */
+:root {
+  --color-primary:        #001489;
+  --color-accent:         #ffd1e6;
+  --color-white:          #ffffff;
+  --color-text:           #1a3a5c;
+
+  --font-family:          'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-size-base:       1rem;
+  --font-size-label:      0.875rem;
+  --font-size-h2:         1.5rem;
+  --font-weight-heading:  700;
+
+  --form-max-width:       560px;
+  --input-border-radius:  8px;
+  --btn-border-radius:    8px;
+  --shadow-card:          0 4px 24px rgba(26, 58, 92, 0.12);
+  --transition:           0.2s ease;
+}
+
+/* ------------------------------------------------------------
+   2. ページ全体
+   ------------------------------------------------------------ */
+body {
+  margin: 0;
+  padding: 8px 16px;
+  min-height: 100vh;
+  background-color: #f0f4f9;
+  background-image: repeating-linear-gradient(
+    0deg,
+    #c2d4e8 0px,
+    #c2d4e8 1px,
+    transparent 1px,
+    transparent 24px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    #c2d4e8 0px,
+    #c2d4e8 1px,
+    transparent 1px,
+    transparent 24px
+  );
+  background-attachment: fixed;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------
+   3. 見出し h2
+   ------------------------------------------------------------ */
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary);
+  margin: 8px 0;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   4. フォームカード
+   ------------------------------------------------------------ */
+form {
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  padding: 12px 32px 24px;
+  width: 100%;
+  max-width: var(--form-max-width);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ------------------------------------------------------------
+   5. ラベル（p タグ）
+   ------------------------------------------------------------ */
+form p {
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* ------------------------------------------------------------
+   6. br タグの余白調整
+   ------------------------------------------------------------ */
+br {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   7. 入力フィールド共通
+   ------------------------------------------------------------ */
+input[type="date"],
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--input-border-radius);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  outline: none;
+  transition: border-color var(--transition), background-color var(--transition), box-shadow var(--transition);
+}
+
+input[type="date"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+  border-color: hotpink;
+  background-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(255, 209, 230, 0.35);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   8. テキストエリア
+   ------------------------------------------------------------ */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------
+   9. ボタン共通
+   ------------------------------------------------------------ */
+input[type="submit"] {
+  width: 100%;
+  padding: 12px 24px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+  letter-spacing: 0.04em;
+}
+
+input[type="submit"]:hover {
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------------------------
+   10. 「カレンダーに戻る」ボタン
+   ------------------------------------------------------------ */
+input[name="back"] {
+  background-color: var(--color-white);
+  color: var(--color-text);
+}
+
+input[name="back"]:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* ------------------------------------------------------------
+   11. 「確認」ボタン
+   ------------------------------------------------------------ */
+input[name="confilm"] {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+input[name="confilm"]:hover {
+  background-color: hotpink;
+}

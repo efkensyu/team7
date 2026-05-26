@@ -1,0 +1,225 @@
+/* ============================================================
+   予定詳細画面 CSS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   0. リセット
+   ------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   1. CSS変数
+   ------------------------------------------------------------ */
+:root {
+  --color-primary:        #001489;
+  --color-accent:         #ffd1e6;
+  --color-white:          #ffffff;
+  --color-text:           #1a3a5c;
+  --color-danger:         #ff4d6d;
+
+  --font-family:          'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-size-base:       1rem;
+  --font-size-label:      0.875rem;
+  --font-size-h2:         1.5rem;
+  --font-weight-heading:  700;
+
+  --content-max-width:    700px;
+  --btn-border-radius:    8px;
+  --shadow-card:          0 4px 24px rgba(26, 58, 92, 0.12);
+  --transition:           0.2s ease;
+}
+
+/* ------------------------------------------------------------
+   2. ページ全体
+   ------------------------------------------------------------ */
+body {
+  margin: 0;
+  padding: 24px 16px;
+  min-height: 100vh;
+  background-color: #f0f4f9;
+  background-image: repeating-linear-gradient(
+    0deg,
+    #c2d4e8 0px,
+    #c2d4e8 1px,
+    transparent 1px,
+    transparent 24px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    #c2d4e8 0px,
+    #c2d4e8 1px,
+    transparent 1px,
+    transparent 24px
+  );
+  background-attachment: fixed;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ------------------------------------------------------------
+   3. 見出し h2
+   ------------------------------------------------------------ */
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   4. メインフォーム
+   ------------------------------------------------------------ */
+form:first-of-type {
+  width: 100%;
+  max-width: var(--content-max-width);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ------------------------------------------------------------
+   5. テーブル
+   ------------------------------------------------------------ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: none;
+}
+
+/* ------------------------------------------------------------
+   6. テーブルヘッダー
+   ------------------------------------------------------------ */
+thead tr {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+thead th {
+  padding: 12px 16px;
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.08em;
+  text-align: left;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ------------------------------------------------------------
+   7. テーブルボディ
+   ------------------------------------------------------------ */
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color var(--transition);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+tbody td {
+  padding: 12px 16px;
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  vertical-align: middle;
+  border: none;
+}
+
+/* ------------------------------------------------------------
+   8. チェックボックス
+   ------------------------------------------------------------ */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: hotpink;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* ------------------------------------------------------------
+   9. ボタンエリア div
+   ------------------------------------------------------------ */
+div {
+  width: 100%;
+}
+
+/* ------------------------------------------------------------
+   10. 削除ボタン
+   ------------------------------------------------------------ */
+button[name="confirm"] {
+  width: 100%;
+  padding: 12px 24px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border: 2px solid var(--color-danger);
+  border-radius: var(--btn-border-radius);
+  background-color: transparent;
+  color: var(--color-danger);
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+  letter-spacing: 0.04em;
+}
+
+button[name="confirm"]:hover {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------------------------
+   11. カレンダーに戻るフォーム
+   ------------------------------------------------------------ */
+form:last-of-type {
+  width: 100%;
+  max-width: var(--content-max-width);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------
+   12. 「カレンダーに戻る」ボタン
+   ------------------------------------------------------------ */
+button[name="backCalender"] {
+  width: 100%;
+  padding: 12px 24px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--btn-border-radius);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+  letter-spacing: 0.04em;
+}
+
+button[name="backCalender"]:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}

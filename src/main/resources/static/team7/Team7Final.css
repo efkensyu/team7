@@ -1,0 +1,124 @@
+/* ============================================================
+   登録完了画面 CSS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   0. リセット
+   ------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   1. CSS変数
+   ------------------------------------------------------------ */
+:root {
+  --color-primary:        #001489;
+  --color-accent:         #ffd1e6;
+  --color-white:          #ffffff;
+  --color-text:           #1a3a5c;
+
+  --font-family:          'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-size-base:       1rem;
+  --font-size-h3:         1.4rem;
+  --font-weight-heading:  700;
+
+  --card-max-width:       560px;
+  --btn-border-radius:    8px;
+  --shadow-card:          0 4px 24px rgba(26, 58, 92, 0.12);
+  --transition:           0.2s ease;
+}
+
+/* ------------------------------------------------------------
+   2. ページ全体
+   ------------------------------------------------------------ */
+body {
+  margin: 0;
+  padding: 8px 16px;
+  min-height: 100vh;
+  background-color: #f0f4f9;
+  background-image: repeating-linear-gradient(
+    0deg,
+    #c2d4e8 0px,
+    #c2d4e8 1px,
+    transparent 1px,
+    transparent 24px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    #c2d4e8 0px,
+    #c2d4e8 1px,
+    transparent 1px,
+    transparent 24px
+  );
+  background-attachment: fixed;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ------------------------------------------------------------
+   3. 見出し h3
+   ------------------------------------------------------------ */
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   4. 確認情報ブロック（th:block > p タグ）
+   ------------------------------------------------------------ */
+p {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-white);
+  letter-spacing: 0.04em;
+  background-color: var(--color-primary);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  max-width: var(--card-max-width);
+  box-shadow: var(--shadow-card);
+}
+
+/* ------------------------------------------------------------
+   5. フォーム（ボタン wrapper）
+   ------------------------------------------------------------ */
+form {
+  width: 100%;
+  max-width: var(--card-max-width);
+}
+
+/* ------------------------------------------------------------
+   6. 「カレンダーに戻る」ボタン
+   ------------------------------------------------------------ */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px 24px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background-color var(--transition), transform var(--transition);
+  background-color: var(--color-white);
+  color: var(--color-text);
+}
+
+button[type="submit"]:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
