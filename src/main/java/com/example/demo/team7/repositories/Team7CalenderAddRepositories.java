@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.team7.entity.Team7CalenderAdd;
 
 @Repository
-public interface Team7CalenderAddRepositories extends JpaRepository<Team7CalenderAdd, String>{
+public interface Team7CalenderAddRepositories extends JpaRepository<Team7CalenderAdd, Integer>{
 	public List<Team7CalenderAdd> findByuserId(String userId);
 
 }
