@@ -19,7 +19,7 @@
 			<th>詳細</th>
 			<th>削除</th>
 		</tr>
-        <tr th:each="d,stat : ${yoteiList}">
+        <tr th:each="d : ${yoteiList}">
 			<td th:text="${d.yoteiCd}"></td>
 			<td th:text="${d.yoteiDt}"></td>
 			<td th:text="${d.yoteiNm}"></td>
