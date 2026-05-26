@@ -167,7 +167,7 @@ public class Team7Controller {
 	@PostMapping(value="/Team7_fromDisplay", params="confirm")
 		public String delete(@ModelAttribute("Team7AccountForm") Team7Form form,
 				@ModelAttribute("Team7CalenderForm") Team7CalenderForm calform,
-				@RequestParam("yoteiCd") String yoteiCd,
+				@RequestParam("confirm") String yoteiCd,
 				Model model) {
 		
 		//ユーザーIDの取得
