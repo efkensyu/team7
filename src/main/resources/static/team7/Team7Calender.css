@@ -6,10 +6,10 @@
    1. CSS変数
    ------------------------------------------------------------ */
 :root {
-  --color-primary:        #001489;
+  --color-primary:        #ffffff;
   --color-accent:         #ffd1e6;
-  --color-bg:             #f0f4f9;
-  --color-white:          #ffffff;
+  --color-bg:             rgb(128, 255, 255);
+  --color-white:          rgb(0, 0, 0);
   --color-text:           #1a3a5c;
   --color-sunday:         #e74c3c;
   --color-saturday:       #4a90d9;
@@ -79,7 +79,7 @@ form > div:first-of-type {
 }
 
 form > div:first-of-type a {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgb(255, 255, 128);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
@@ -106,8 +106,8 @@ table {
    7. 曜日見出し行
    ------------------------------------------------------------ */
 table tr:first-child th {
-  background-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.85);
+  background-color: rgb(128, 255, 255);
+  color: rgb(0, 0, 0);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -121,7 +121,7 @@ th.red {
 }
 
 th.sat {
-  color: rgba(74, 144, 217, 0.9) !important;
+  color: rgb(0, 0, 160) !important;
 }
 
 /* ------------------------------------------------------------
@@ -143,7 +143,7 @@ td:nth-child(1) {
 
 /* 土曜列（7列目） */
 td:nth-child(7) {
-  color: rgba(74, 144, 217, 0.85);
+  color: rgb(0, 0, 255);
 }
 
 /* ------------------------------------------------------------
