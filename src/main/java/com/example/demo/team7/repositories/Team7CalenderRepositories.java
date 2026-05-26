@@ -25,5 +25,7 @@ public interface Team7CalenderRepositories extends JpaRepository<Team7CalenderEn
 	
 	//select * from yotei_tbl where yotei_dt = date and user_id = user
 	public List<Team7CalenderEntity> findByUserIdAndYoteiDt(String user, LocalDate date);
+	
+	public List<Team7CalenderEntity> findByYoteiCd(String code);
 
 }
