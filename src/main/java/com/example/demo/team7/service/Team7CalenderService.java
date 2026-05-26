@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.team7.entity.Team7CalenderEntity;
 import com.example.demo.team7.repositories.Team7CalenderRepositories;
@@ -44,26 +43,5 @@ public class Team7CalenderService {
 	public List<Team7CalenderEntity> findByYoteiCd(String code) {
 		return repository.findByYoteiCd(code);
 	}
-	
-	//予定の詳細が入っていた場合
-	@Transactional
-	public Team7CalenderEntity insertYotei(String date, String yoteiNm, String yoteiDetail) {
-		Team7CalenderEntity team7Calender = new Team7CalenderEntity();
-		LocalDate day = LocalDate.parse(date);
-		team7Calender.setYoteiDt(day);
-		team7Calender.setYoteiNm(yoteiNm);
-		team7Calender.setYoteiDetail(yoteiDetail);
-		return repository.save(team7Calender);
-	}
-	
-	//予定の詳細が入っていない場合
-		@Transactional
-		public Team7CalenderEntity insertYoteiNotDetail(String date, String yoteiNm) {
-			Team7CalenderEntity team7Calender = new Team7CalenderEntity();
-			LocalDate day = LocalDate.parse(date);
-			team7Calender.setYoteiDt(day);
-			team7Calender.setYoteiNm(yoteiNm);
-			team7Calender.setYoteiDetail(null);
-			return repository.save(team7Calender);
-		}
+
 }
