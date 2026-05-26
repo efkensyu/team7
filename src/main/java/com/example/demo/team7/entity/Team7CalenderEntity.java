@@ -20,7 +20,7 @@ public class Team7CalenderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String yoteiCd;  //予定のID(管理用)
-	@NotBlank(message="予定名を入力してください")
+//	@NotBlank(message="予定名を入力してください")
 	@Size(max=30,message="予定名は30文字以内にしてください")
 	private String yoteiNm;  //予定の名前
 	@Size(max=300,message="予定名は300文字以内にしてください")
