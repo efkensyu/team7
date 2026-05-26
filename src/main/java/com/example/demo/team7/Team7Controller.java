@@ -78,7 +78,7 @@ public class Team7Controller {
 		//月の日数を取得
 		int daysInMonth = firstDay.lengthOfMonth();
 		
-		//その日の予定の件数を取得
+		//その日の予定の件数を取得してリストに格納
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		List<Long> countList = new ArrayList<>();
 		for (int i=1; i <= daysInMonth; i++) {
@@ -98,7 +98,7 @@ public class Team7Controller {
 		model.addAttribute("firstDayOfMonth",firstDayOfMonth);
 		model.addAttribute("daysInMonth",daysInMonth);
 		
-		model.addAttribute("countDays",countList);
+		model.addAttribute("countList",countList);
 		model.addAttribute("user",userId);
 		
 		return "team7/Team7Calender";
@@ -123,31 +123,39 @@ public class Team7Controller {
 	@PostMapping(value="/Team7_fromCalender", params="print")
 	public String display(@ModelAttribute("Team7AccountForm") Team7Form form,
 			@ModelAttribute("Team7CalenderForm") Team7CalenderForm calform,
-			@RequestParam("day") int[] day,
+			@RequestParam("year") int year,
+			@RequestParam("month") int month,
+			@RequestParam(required = false) int[] day,
 	        Model model) {
 		
-		//ユーザーIDの取得
-		String userId = form.getUserCd();
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		
-		LocalDate today = LocalDate.now();
-		ArrayList<String> countDay = new ArrayList<>();
-		
-		List<Team7CalenderEntity> yoteiList = new ArrayList<>();
-		
-		for (int i: day) {
-			LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
-			countDay.add(days.format(format));
-		}
-		for (String cD:countDay) {
-			yoteiList =  service2.findByUserIdAndYoteiDt(userId, cD);
-		}
+		if (day == null || day.length == 0) {
+			return "redirect:/Team7Calender";
+		} else {
+			//ユーザーIDの取得
+			String userId = form.getUserCd();
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			LocalDate today = LocalDate.of(year,month,LocalDate.now().getDayOfMonth());
+			ArrayList<String> countDay = new ArrayList<>();
+			
+			List<Team7CalenderEntity> yoteiList = new ArrayList<>();
+			
+			for (int i: day) {
+				LocalDate days = LocalDate.of(today.getYear(), today.getMonthValue(), i);
+				countDay.add(days.format(format));
+			}
+			for (String cD:countDay) {
+				yoteiList = service2.findByUserIdAndYoteiDt(userId, cD);
+			}
+		System.out.println(countDay);
+		System.out.println(yoteiList.get(0));
 		
 		model.addAttribute("countDay",countDay);
 		model.addAttribute("userId",userId);
 		model.addAttribute("yoteiList",yoteiList);
 
 	    return "team7/Team7Display";
+		}
 	}
 	
 	//詳細表示からカレンダーに戻る
@@ -161,20 +169,7 @@ public class Team7Controller {
 	//詳細表示から削除確認画面に行く
 	@PostMapping(value="/Team7_fromDisplay", params="confirm")
 		public String delete() {
-		return "team7/Team7Delete";
-	}
-	
-	//削除確認画面から何もせずに戻る
-	@PostMapping(value="/Team7_fromDelete", params="back")
-		public String deleteback() {
-		return "team7/Team7Display";
-	}
-	
-	//削除確認画面から削除して戻る
-	@PostMapping(value="/Team7_fromDelete", params="clear")
-		public String doingdelete() {
-			//処理を書く
-		return "team7/Team7Display";
+		return "redirect:/Team7Delete";
 	}
 	
 
