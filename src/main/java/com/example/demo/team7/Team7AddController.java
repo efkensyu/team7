@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -51,8 +52,17 @@ public class Team7AddController {
     }
 
     @PostMapping(value = "/Team7_fromPlanConfirm", params = "back")
-    public String planconback(@ModelAttribute Team7CalenderForm form, Model model) {
+    public String planconback(@ModelAttribute("Team7CalenderForm") Team7CalenderForm form,
+			@RequestParam("year") int year,
+			@RequestParam("month") int month,
+			@RequestParam(required = false) int[] day,Model model) {
         model.addAttribute("team7CalenderForm", form);
+        model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		if (day != null && day.length > 0) {
+			model.addAttribute("day", day[0]);
+			System.out.println(day[0]);
+		}
         return "team7/Team7PlanAdd";
     }
 

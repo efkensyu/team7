@@ -49,7 +49,7 @@ public class Team7DeleteController {
 	//削除確認画面から何もせずに戻る
 	@PostMapping(value="/Team7_fromDelete", params="back")
 		public String deleteback() {
-		return "redirect:/Team7Display";
+		return "redirect:/Team7Calender";
 	}
 	
 	//削除確認画面から削除して戻る
