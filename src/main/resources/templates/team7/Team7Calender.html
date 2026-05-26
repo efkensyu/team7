@@ -9,11 +9,13 @@
 	<!--たつざわ-->
 	<h2><th:block th:text="${year}"></th:block>年<th:block th:text="${month}"></th:block>月のカレンダー</h2>
 	<p th:text="ユーザー名 + ${user}"></p>
+	<a th:href="@{/Team7Calender(year=${prevYear},month=${prevMonth})}">前の月</a>
+	<a th:href="@{/Team7Calender(year=${nextYear},month=${nextMon})}">次の月</a>
 	<form method="post" th:action="@{/Team7_fromCalender}">
+		<input type="hidden" name="year" th:value="${year}" />
+		<input type="hidden" name="month" th:value="${month}" />
 		<input type="submit" name="add" value="予定追加" />
 		
-		<a th:href="@{/Team7Calender(year=${prevYear},month=${prevMonth})}">前の月</a>
-		<a th:href="@{/Team7Calender(year=${nextYear},month=${nextMon})}">次の月</a>
 		
 		<div>
 		<table border="1">
@@ -32,7 +34,7 @@
 							dateNum=${cellIndex - firstDayOfMonth + 1}">
 					<input class="cal" type="checkbox" th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth}" th:value="${dateNum}" name="day">
 					<th:block class="box" th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth}" th:text="${dateNum}"></th:block>
-					<p th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth}" th:text="予定 +${countList} +件"></p>
+					<p th:if="${cellIndex >= firstDayOfMonth and dateNum <= daysInMonth and dateNum >= 1}" th:text="予定 +${countList[dateNum-1]} +件"></p>
 				</td>
 			</tr>	
 		</table>

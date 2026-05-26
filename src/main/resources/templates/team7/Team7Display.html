@@ -12,15 +12,15 @@
     <!-- 予定一覧テーブル -->
     <table>
 		<tr>
-			<th>日付</th>
 			<th>予定ID</th>
+			<th>日付</th>
 			<th>予定名</th>
 			<th>詳細</th>
 			<th>ユーザーID</th>
 			<th>削除</th>
 		</tr>
         <tr th:each="d : ${yoteiList}">
-			<td th:text="${d.yoteiDt}"></td>
+			<td th:text="${d.yoteiCd}"></td>
 			<td th:text="${d.yoteiDt}"></td>
 			<td th:text="${d.yoteiNm}"></td>
 			<td th:text="${d.yoteiDetail}"></td>
