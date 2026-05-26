@@ -137,7 +137,8 @@ public class Team7Controller {
 			
 			ArrayList<String> countDay = new ArrayList<>();
 			
-			List<Team7CalenderEntity> yoteiList = new ArrayList<>();
+			List<Team7CalenderEntity> yoteiList;
+			List<Team7CalenderEntity> yoteis = new ArrayList<>();
 			
 			for (int i: day) {
 				LocalDate days = LocalDate.of(year, month, i);
@@ -145,11 +146,12 @@ public class Team7Controller {
 			}
 			for (String cD:countDay) {
 				yoteiList = service2.findByUserIdAndYoteiDt(userId, cD);
+				yoteis.addAll(yoteiList);
 			}
 		
 		model.addAttribute("countDay",countDay);
 		model.addAttribute("userId",userId);
-		model.addAttribute("yoteiList",yoteiList);
+		model.addAttribute("yoteiList",yoteis);
 
 	    return "team7/Team7Display";
 		}
