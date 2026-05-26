@@ -104,8 +104,33 @@ public class Team7Controller {
 		
 		return "team7/Team7Calender";
 	}	
-
 	
+	@GetMapping("/Team7Display")
+	public String displayPage(
+	        @ModelAttribute("Team7AccountForm") Team7Form form,
+	        @RequestParam("year") int year,
+	        @RequestParam("month") int month,
+	        @RequestParam("day") int day,
+	        Model model) {
+
+	    String userId = form.getUserCd();
+
+	    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    LocalDate date = LocalDate.of(year, month, day);
+	    String targetDay = date.format(format);
+
+	    List<Team7CalenderEntity> yoteiList =
+	            service2.findByUserIdAndYoteiDt(userId, targetDay);
+
+	    model.addAttribute("yoteiList", yoteiList);
+	    model.addAttribute("userId", userId);
+	    model.addAttribute("year", year);
+	    model.addAttribute("month", month);
+	    model.addAttribute("day", day);
+
+	    return "team7/Team7Display";
+	}
+
 	//たつざわ
 	//カレンダーから予定追加の画面に行く
 	@PostMapping(value="/Team7_fromCalender", params="add")
@@ -153,6 +178,10 @@ public class Team7Controller {
 		model.addAttribute("countDay",countDay);
 		model.addAttribute("userId",userId);
 		model.addAttribute("yoteiList",yoteis);
+		
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day[0]);
 
 	    return "team7/Team7Display";
 		}
@@ -171,6 +200,9 @@ public class Team7Controller {
 		public String delete(@ModelAttribute("Team7AccountForm") Team7Form form,
 				@ModelAttribute("Team7CalenderForm") Team7CalenderForm calform,
 				@RequestParam("confirm") String yoteiCd,
+				@RequestParam("year") int year,
+			    @RequestParam("month") int month,
+			    @RequestParam("day") int day,
 				Model model) {
 		
 		//ユーザーIDの取得
@@ -181,8 +213,11 @@ public class Team7Controller {
 		System.out.println(yotei);
 		
 		model.addAttribute("CalenderEntity",yotei);
+		model.addAttribute("year", year);
+	    model.addAttribute("month", month);
+	    model.addAttribute("day", day);
 
-		return "redirect:/Team7Delete";
+		return "team7/Team7Delete";
 	}
 	
 

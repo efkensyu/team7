@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>予定詳細</title>
-	
-	<link rel="stylesheet" th:href="@{/team7/Team7Delete.css}">
-	
+<meta charset="UTF-8">
+<title>予定詳細</title>
+
+<link rel="stylesheet" th:href="@{/team7/Team7Delete.css}">
+
 </head>
 <body>
 
-    <h2 th:text="${year} + '年' + ${month} + '月' + ${day} + '日の予定'"></h2>
-
-    <form action="/Team7_fromDisplay" method="post">
+    <form action="/Team7_fromDelete" method="post">
+		
+		<input type="hidden" name="year" th:value="${year}">
+		<input type="hidden" name="month" th:value="${month}">
+		<input type="hidden" name="day" th:value="${day}">
 
         <table border="1">
             <thead>
                 <tr>
-                    <th>選択</th>
+                    <th>日付</th>
                     <th>予定ID</th>
                     <th>予定名</th>
                     <th>詳細</th>
                     <th>ユーザーID</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr th:each="s : ${CalenderEntity}">
-                    <!-- ✅ チェックボックス：yoteiCdを送る -->
+                    <td th:text="${s.yoteiDt}"></td>
                     <td>
-                        <input type="checkbox" name="yoteiCd"
-                               th:value="${s.yoteiCd}"/>
+                        <span th:text="${s.yoteiCd}"></span>
+                        <input type="hidden"
+                               name="yoteiCd"
+                               th:value="${s.yoteiCd}">
                     </td>
-                    <td th:text="${s.yoteiCd}"></td>
                     <td th:text="${s.yoteiNm}"></td>
                     <td th:text="${s.yoteiDetail}"></td>
                     <td th:text="${s.userId}"></td>
@@ -40,15 +44,14 @@
 
         <!-- ボタンエリア -->
         <div>
-            <!-- 削除確認画面へ -->
-            <button type="submit" name="confirm">🗑 削除する</button>
+            <!-- 削除 -->
+            <button type="submit" name="clear">🗑 削除する</button>
         </div>
 
     </form>
-
-    <!-- カレンダーに戻る（別フォーム） -->
+    <!-- カレンダーに戻る -->
     <form action="/Team7_fromDisplay" method="post">
-        <button type="submit" name="backCalender">← カレンダーに戻る</button>
+        <button type="submit" name="backCalender">← 詳細画面に戻る</button>
     </form>
 
 </body>

@@ -26,6 +26,9 @@
 			<td th:text="${d.yoteiDetail}"></td>
                 <!-- 削除ボタンは行ごとに配置 -->
 			<td><button type="submit" th:value="${d.yoteiCd}" name="confirm">削除</button>
+				<input type="hidden" name="year" th:value="${year}">
+				<input type="hidden" name="month" th:value="${month}">
+				<input type="hidden" name="day" th:value="${day}">
 			</td>
 		
 		</tr>
