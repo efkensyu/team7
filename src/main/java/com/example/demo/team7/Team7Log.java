@@ -19,15 +19,10 @@ public class Team7Log {
 	
 	@Around("execution (* com.example.demo.team7.*.*(..))")
 	public Object aroundLog(ProceedingJoinPoint jp) throws Throwable {
-		try {
 			log.info("メソッド開始： " + jp.getSignature());
 			log.info("送ったデータ： " + Arrays.toString(jp.getArgs()));
 			Object result = jp.proceed();
 			return result;
-		} catch(Exception e) {
-			return "team7/Team7Error";
-			
-		}
 	}
 	
 	@AfterReturning("execution (* com.example.demo.team7.*.*(..))")
@@ -36,8 +31,8 @@ public class Team7Log {
 	}
 	
 	@AfterThrowing("execution (* com.example.demo.team7.*.*(..))")
-	public void throwingLog(JoinPoint jp) {
-		log.error("エラー発生：" + jp.getSignature());
+	public void throwingLog(JoinPoint jp, Exception e) {
+		log.error("エラー発生：" + jp.getSignature(),e);
 	}
 	
 	
