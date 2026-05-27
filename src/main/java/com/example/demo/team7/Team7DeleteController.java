@@ -51,6 +51,7 @@ public class Team7DeleteController {
 		public String deleteback( @RequestParam("year") int year,
                 @RequestParam("month") int month,
                 @RequestParam("day") int day,
+                @RequestParam(required=false) int[] days,
                 @ModelAttribute("Team7AccountForm") Team7Form form, 
                 RedirectAttributes redirectAttributes, Model model) {
 		
@@ -58,8 +59,12 @@ public class Team7DeleteController {
 
 	    redirectAttributes.addAttribute("year", year);
 	    redirectAttributes.addAttribute("month", month);
-	    redirectAttributes.addAttribute("day", day);
 	    redirectAttributes.addAttribute("userId", userId);
+	    if (days.length == 1) {
+	    	redirectAttributes.addAttribute("day", day);
+	    } else if (days.length >=2) {
+	    	redirectAttributes.addAttribute("day",days);
+	    }
 
 	    return "redirect:/Team7Display";
 	}
@@ -70,6 +75,7 @@ public class Team7DeleteController {
 				                  @RequestParam("year") int year,
 		                          @RequestParam("month") int month,
 		                          @RequestParam("day") int day,
+		                          @RequestParam(required=false) int[] days,
 		                          @ModelAttribute("Team7AccountForm") Team7Form form, 
 		                          RedirectAttributes redirectAttributes, Model model) {
 			
@@ -80,7 +86,11 @@ public class Team7DeleteController {
 
 		    redirectAttributes.addAttribute("year", year);
 		    redirectAttributes.addAttribute("month", month);
-		    redirectAttributes.addAttribute("day", day);
+		    if (days.length == 1) {
+		    	redirectAttributes.addAttribute("day", day);
+		    } else if (days.length >=2) {
+		    	redirectAttributes.addAttribute("day",days);
+		    }
 		    redirectAttributes.addAttribute("userId", userId);
 
 		    return "redirect:/Team7Display";
