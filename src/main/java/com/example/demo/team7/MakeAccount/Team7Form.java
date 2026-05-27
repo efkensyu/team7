@@ -8,8 +8,9 @@ import lombok.Data;
 
 @Data
 public class Team7Form {
+
 	@NotBlank(message = "IDをきめてね。")
-    @Pattern(regexp= "^(|.{4,8})$", message = "IDは4文字以上8文字以内でおねがいね。")
+    @Pattern(regexp = "^[0-9]{4,8}$", message = "IDは4〜8桁の数字で入力してください")
 	private String userCd;
 	
 	@NotBlank(message = "パスワードをきめてね。")
