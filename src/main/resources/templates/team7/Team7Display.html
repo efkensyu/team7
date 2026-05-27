@@ -11,6 +11,7 @@
 
     <!-- 予定一覧テーブル -->
 	<form th:action="@{/Team7_fromDisplay}" method="post">
+		<input type="hidden" th:each="dayList : ${dayList}" name="dayList" th:value="${dayList}">
     <table>
 		<tr>
 			<th>予定ID</th>

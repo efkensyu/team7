@@ -110,23 +110,44 @@ public class Team7Controller {
 	        @ModelAttribute("Team7AccountForm") Team7Form form,
 	        @RequestParam("year") int year,
 	        @RequestParam("month") int month,
-	        @RequestParam("day") int day,
+	        @RequestParam(required = false) int[] day,
 	        Model model) {
 
 	    String userId = form.getUserCd();
 
 	    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	    LocalDate date = LocalDate.of(year, month, day);
-	    String targetDay = date.format(format);
-
-	    List<Team7CalenderEntity> yoteiList =
-	            service2.findByUserIdAndYoteiDt(userId, targetDay);
+	    LocalDate date;
+	    List<String> targetDay = new ArrayList<>();
+	    List<Team7CalenderEntity> yoteiList = new ArrayList<>();
+	    
+		    if (day.length == 1) {
+		    	date = LocalDate.of(year, month, day[0]);
+		    	targetDay.add(date.format(format));
+		    } else if (day.length >= 2) {
+		    	for (int i=0; i < day.length; i++) {
+		    		date = LocalDate.of(year, month, day[i]);
+			    	targetDay.add(date.format(format));
+		    	}
+		    }
+		    
+	    for (String t:targetDay) {
+	    	yoteiList.addAll(service2.findByUserIdAndYoteiDt(userId, t));
+	    	System.out.println(yoteiList);
+	    }
+	    
+	    System.out.println(targetDay);
+	    System.out.println(yoteiList);
 
 	    model.addAttribute("yoteiList", yoteiList);
 	    model.addAttribute("userId", userId);
 	    model.addAttribute("year", year);
 	    model.addAttribute("month", month);
-	    model.addAttribute("day", day);
+	    if (day != null && day.length > 0) {
+			model.addAttribute("day", day[0]);
+			if (day.length >= 2) {
+				model.addAttribute("dayList",day);
+			}
+		}
 
 	    return "team7/Team7Display";
 	}
@@ -170,6 +191,8 @@ public class Team7Controller {
 		List<Team7CalenderEntity> yoteiList = new ArrayList<>();
 		List<Team7CalenderEntity> yoteis = new ArrayList<>();
 		
+//		System.out.println(day[0]);
+		
 		if (day == null || day.length == 0) {
 			for (int i=1; i<=daysInMonth; i++) {
 				LocalDate days = LocalDate.of(year, month, i);
@@ -183,7 +206,9 @@ public class Team7Controller {
 				countDay.add(days.format(format));
 			}
 		}
-		System.out.println(countDay);
+		
+//		System.out.println(countDay);
+		
 		for (String i: countDay) {
 			yoteiList = service2.findByUserIdAndYoteiDt(userId, i);
 				yoteis.addAll(yoteiList);
@@ -201,7 +226,6 @@ public class Team7Controller {
 				model.addAttribute("dayList",day);
 			}
 		}
-			
 		
 		if (day == null || day.length == 0) {
 			return "team7/Team7TotalDisplay";
@@ -225,9 +249,9 @@ public class Team7Controller {
 				@RequestParam("confirm") String yoteiCd,
 				@RequestParam("year") int year,
 			    @RequestParam("month") int month,
-			    @RequestParam(required = false) int day,
+			    @RequestParam("day") int day,
+			    @RequestParam("dayList") int[] dayList,
 				Model model) {
-		System.out.println(day);
 		
 		//ユーザーIDの取得
 		String userId = form.getUserCd();
@@ -240,6 +264,7 @@ public class Team7Controller {
 		model.addAttribute("year", year);
 	    model.addAttribute("month", month);
 		model.addAttribute("day", day);
+		model.addAttribute("dayList",dayList);
 
 
 		return "team7/Team7Delete";

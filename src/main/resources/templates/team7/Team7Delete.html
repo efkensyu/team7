@@ -50,6 +50,7 @@
 		<div>
 		<!-- カレンダーに戻る -->
 		<button type="submit" name="backCalender">← 詳細画面に戻る</button>
+		<input type="hidden" th:each="dayList: ${dayList}" name="days" th:value="${dayList}" />
 		</div>
 
     </form>
