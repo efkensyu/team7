@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form method="post" th:action="@{/Team7_fromLogout}" th:object="${Team7AccountForm}">
+		<th:block th:text="ユーザー名 + ${userNm}"></th:block>
+		<p>ログアウトしますか？</p>
+		<input type="submit" name="yes" value="はい" />
+		<input type="submit" name="no" value="いいえ" />
+	</form>
+
+</body>
+</html>
