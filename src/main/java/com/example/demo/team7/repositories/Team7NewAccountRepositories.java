@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.team7.entity.Team7NewAccount;
 
 @Repository
-public interface Team7NewAccountRepositories extends JpaRepository<Team7NewAccount, String>{
-	public List<Team7NewAccount> findByNewuserCd(String code);
+public interface Team7NewAccountRepositories extends JpaRepository<Team7NewAccount, Integer>{
+	public List<Team7NewAccount> findByNewuserCd(int code);
 
 	
 	@Query(value = "select * from team7_user_tbl where user_cd = :code", nativeQuery = true)
-	public List<Team7NewAccount> findNewuserCd(@Param("code") String code);
+	public List<Team7NewAccount> findNewuserCd(@Param("code") int userCd);
 }

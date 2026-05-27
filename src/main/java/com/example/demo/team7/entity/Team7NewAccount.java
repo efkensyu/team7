@@ -13,7 +13,7 @@ import lombok.Data;
 public class Team7NewAccount {
 	 @Id
 	    @Column(name = "user_cd")
-	    private String newuserCd;
+	    private Integer newuserCd;
 
 	    @Column(name = "user_pw")
 	    private String newuserPw;

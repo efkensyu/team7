@@ -38,14 +38,15 @@ public class Team7NewAccountController {
 	
 	@PostMapping(value = "/Team7_fromNewAccount",params = "make") 
 	public String Newchecker(@Validated @ModelAttribute("team7NewAccountForm") Team7NewAccountForm form, BindingResult result, Model model) {
-        String userCd = form.getUserCd();
         String userPw = form.getUserPw();
-        
-		boolean Newcheck = newAccountService.AccountCheck(userCd, userPw);
-		
-		if(result.hasErrors()) {
-			return "team7/Team7NewAccount";
+        		
+		if (result.hasErrors()) {
+		    return "team7/Team7NewAccount";
 		}
+
+		int userCd = Integer.parseInt(form.getUserCd());
+		boolean Newcheck = newAccountService.AccountCheck(userCd, userPw);
+
 		
 		if (!Newcheck) {
 			model.addAttribute("error", "このユーザー名は既に存在します。");
@@ -69,8 +70,8 @@ public class Team7NewAccountController {
 	
 	@PostMapping(value = "/Team7_fromConfirm",params = "Confirm")
 	public String Confirm(@ModelAttribute("team7NewAccountForm") Team7NewAccountForm form, SessionStatus sessionStatus) {
-		String userCd = form.getUserCd();
-        String userPw = form.getUserPw();
+		int userCd = Integer.parseInt(form.getUserCd());        
+		String userPw = form.getUserPw();
         
 		newAccountService.registerAccount(userCd, userPw);
 		sessionStatus.setComplete();

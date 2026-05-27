@@ -3,6 +3,9 @@ package com.example.demo.team7.service;
 
 import java.util.List;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.team7.entity.Team7NewAccount;
@@ -16,7 +19,7 @@ public class Team7LNewAccountService {
 
     private final Team7NewAccountRepositories repository;
 
-    public boolean AccountCheck(String userCd, String userPw) {
+    public boolean AccountCheck(int userCd, String userPw) {
 
     	List<Team7NewAccount> list = repository.findNewuserCd(userCd);
 
@@ -28,7 +31,7 @@ public class Team7LNewAccountService {
         }
     }
     // ★3: 追加：データベース（user_tbl）にデータを保存するメソッド
-    public void registerAccount(String userCd, String userPw) {
+    public void registerAccount(@NotBlank(message = "IDを入力してください。") @Pattern(regexp = "^[0-9](|.{4,8})$", message = "IDは4文字以上8文字以内です。") int userCd, String userPw) {
         // エンティティ（箱）のインスタンスを作成
         Team7NewAccount newAccount = new Team7NewAccount();
         
