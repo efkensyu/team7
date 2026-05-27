@@ -197,8 +197,12 @@ public class Team7Controller {
 		model.addAttribute("month", month);
 		if (day != null && day.length > 0) {
 			model.addAttribute("day", day[0]);
-			System.out.println(day[0]);
+			if (day.length >= 2) {
+				model.addAttribute("dayList",day);
+			}
 		}
+			
+		
 		if (day == null || day.length == 0) {
 			return "team7/Team7TotalDisplay";
 		} else {
