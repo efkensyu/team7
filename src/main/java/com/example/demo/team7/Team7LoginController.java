@@ -8,7 +8,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.team7.MakeAccount.Team7Form;
 import com.example.demo.team7.service.Team7LoginService;
@@ -59,6 +61,25 @@ public class Team7LoginController {
 	public String make() {
 		return "redirect:/Team7NewAccount";
 		
+	}
+	
+	//たつざわ
+	//ログアウト
+	@PostMapping(value="/Team7_fromCalender", params="Logout")
+	public String logout(@ModelAttribute("Team7AccountForm") Team7Form form,@RequestParam("userId") String userId,Model model) {
+		model.addAttribute("userNm",userId);
+		return "team7/Team7Logout";
+	}
+	
+	@PostMapping(value="/Team7_fromLogout", params="yes")
+	public String yesLogout(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "redirect:/Team7Login";
+	}
+	
+	@PostMapping(value="/Team7_fromLogout", params="no")
+	public String noLogout() {
+		return "redirect:/Team7Calender";
 	}
 	
 }
