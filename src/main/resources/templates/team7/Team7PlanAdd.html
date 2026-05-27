@@ -12,7 +12,7 @@
 	<h2><th:block th:text="ユーザー名 + ${userId} + の予定追加"></h2>
 	<form method="post" th:action="@{/Team7_fromPlanAdd}"th:object="${team7CalenderForm}">
 		<p>日付</p>
-		<input type="date" th:field="*{data}">
+		<input type="date" min="2025-01-01" max="2030-12-31" th:field="*{data}" />
 		<br>
 		<p>予定を入力</p>
 		<input type="text" th:field="*{sche}" />

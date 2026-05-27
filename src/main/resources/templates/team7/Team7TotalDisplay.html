@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>予定詳細</title>
+	
+	<link rel="stylesheet" th:href="@{/team7/Team7Display.css}">
+	
+</head>
+<body>
+	<h2 th:text="${userId} + の予定一覧"></h2>
+
+    <!-- 予定一覧テーブル -->
+	<form th:action="@{/Team7_fromDisplay}" method="post">
+    <table>
+		<tr>
+			<th>予定ID</th>
+			<th>日付</th>
+			<th>予定名</th>
+			<th>詳細</th>
+			<th>削除</th>
+		</tr>
+        <tr th:each="d : ${yoteiList}">
+			<td th:text="${d.yoteiCd}"></td>
+			<td th:text="${d.yoteiDt}"></td>
+			<td th:text="${d.yoteiNm}"></td>
+			<td th:text="${d.yoteiDetail}"></td>
+		
+		</tr>
+    </table>
+	</form>
+	<form method="post" th:action="@{/Team7_fromDisplay}" >
+    <button type="submit" name="backCalender" >← カレンダーに戻る</button>
+	</form>
+
+</body>
+</html>

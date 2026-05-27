@@ -171,18 +171,19 @@ public class Team7Controller {
 		List<Team7CalenderEntity> yoteis = new ArrayList<>();
 		
 		if (day == null || day.length == 0) {
-//			for (int i=1; i<=daysInMonth; i++) {
-//				LocalDate days = LocalDate.of(year, month, i);
-//				countDay.add(days.format(format));
-//			}
-			return "redirect:Team7Calender";
+			for (int i=1; i<=daysInMonth; i++) {
+				LocalDate days = LocalDate.of(year, month, i);
+				countDay.add(days.format(format));
+			}
+//			return "redirect:Team7Calender";
+//			return "team7/Team7TotalDisplay";
 		} else {
 			for (int i: day) {
 				LocalDate days = LocalDate.of(year, month, i);
 				countDay.add(days.format(format));
 			}
 		}
-		
+		System.out.println(countDay);
 		for (String i: countDay) {
 			yoteiList = service2.findByUserIdAndYoteiDt(userId, i);
 				yoteis.addAll(yoteiList);
@@ -196,9 +197,13 @@ public class Team7Controller {
 		model.addAttribute("month", month);
 		if (day != null && day.length > 0) {
 			model.addAttribute("day", day[0]);
-//			System.out.println(day[0]);
+			System.out.println(day[0]);
 		}
-		return "team7/Team7Display";
+		if (day == null || day.length == 0) {
+			return "team7/Team7TotalDisplay";
+		} else {
+			return "team7/Team7Display";
+		}
 	}
 	
 	//詳細表示からカレンダーに戻る
