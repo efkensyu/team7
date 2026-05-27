@@ -2,9 +2,12 @@ package com.example.demo.team7;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -44,8 +47,13 @@ public class Team7AddController {
     }
 
     @PostMapping(value = "/Team7_fromPlanAdd", params = "confilm")
-    public String planconfilm(@ModelAttribute Team7CalenderForm form, Model model) {
+    public String planconfilm(@RequestParam("userId") String userId, @ModelAttribute @Validated Team7CalenderForm form, BindingResult result ,Model model) {
 //    	System.out.println("★ confilm: data=" + form.getData());
+    	if (result.hasErrors()) {
+    		model.addAttribute("userId",userId);
+    		System.out.println(userId);
+    		return "team7/Team7PlanAdd";
+    	}
         model.addAttribute("team7CalenderForm", form);
         return "team7/Team7PlanConfirm";
     }
