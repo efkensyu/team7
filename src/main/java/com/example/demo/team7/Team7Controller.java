@@ -171,10 +171,11 @@ public class Team7Controller {
 		List<Team7CalenderEntity> yoteis = new ArrayList<>();
 		
 		if (day == null || day.length == 0) {
-			for (int i=1; i<=daysInMonth; i++) {
-				LocalDate days = LocalDate.of(year, month, i);
-				countDay.add(days.format(format));
-			}
+//			for (int i=1; i<=daysInMonth; i++) {
+//				LocalDate days = LocalDate.of(year, month, i);
+//				countDay.add(days.format(format));
+//			}
+			return "redirect:Team7Calender";
 		} else {
 			for (int i: day) {
 				LocalDate days = LocalDate.of(year, month, i);
@@ -182,14 +183,10 @@ public class Team7Controller {
 			}
 		}
 		
-		for (int i=1; i<=countDay.size(); i++) {
-			yoteiList = service2.findByUserIdAndYoteiDt(userId, countDay.get(i-1));
-//			if (!yoteiList.isEmpty()) {
+		for (String i: countDay) {
+			yoteiList = service2.findByUserIdAndYoteiDt(userId, i);
 				yoteis.addAll(yoteiList);
-//			}
-//			System.out.println(yoteiList);
 		}
-//		System.out.println(yoteis);
 		
 		model.addAttribute("countDay",countDay);
 		model.addAttribute("userId",userId);
