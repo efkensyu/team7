@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <form action="/Team7_fromDelete" method="post">
+    <form th:action="@{/Team7_fromDelete}" method="post">
 		
 		<input type="hidden" name="year" th:value="${year}">
 		<input type="hidden" name="month" th:value="${month}">

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>登録完了</title>
 
-<link rel="stylesheet" th:href="@{/team7/Team7Final.css}">
+<link rel="stylesheet" th:href="@{team7/Team7Final.css}">
 
 </head>
 <body>
@@ -16,7 +16,7 @@
         <p th:text="'詳細：' + *{detail}"></p>
     </th:block>
 	
-	<form action="/Team7_fromfinal" method="post">
+	<form th:action="@{/Team7_fromfinal}" method="post">
 	 <button type="submit" name="back">← カレンダーに戻る</button>
 	    </form>
 	
