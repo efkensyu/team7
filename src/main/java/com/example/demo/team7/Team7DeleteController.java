@@ -47,9 +47,21 @@ public class Team7DeleteController {
 	}
 	
 	//削除確認画面から何もせずに戻る
-	@PostMapping(value="/Team7_fromDelete", params="back")
-		public String deleteback() {
-		return "redirect:/Team7Calender";
+	@PostMapping(value="/Team7_fromDelete", params="backCalender")
+		public String deleteback( @RequestParam("year") int year,
+                @RequestParam("month") int month,
+                @RequestParam("day") int day,
+                @ModelAttribute("Team7AccountForm") Team7Form form, 
+                RedirectAttributes redirectAttributes, Model model) {
+		
+        String userId = form.getUserCd();
+
+	    redirectAttributes.addAttribute("year", year);
+	    redirectAttributes.addAttribute("month", month);
+	    redirectAttributes.addAttribute("day", day);
+	    redirectAttributes.addAttribute("userId", userId);
+
+	    return "redirect:/Team7Display";
 	}
 	
 	//削除確認画面から削除して戻る
@@ -69,6 +81,7 @@ public class Team7DeleteController {
 		    redirectAttributes.addAttribute("year", year);
 		    redirectAttributes.addAttribute("month", month);
 		    redirectAttributes.addAttribute("day", day);
+		    redirectAttributes.addAttribute("userId", userId);
 
 		    return "redirect:/Team7Display";
 	}

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <form th:action="@{/Team7_fromDelete}" method="post">
+    <form action="/Team7_fromDelete" method="post">
 		
 		<input type="hidden" name="year" th:value="${year}">
 		<input type="hidden" name="month" th:value="${month}">
@@ -47,11 +47,11 @@
             <!-- 削除 -->
             <button type="submit" name="clear">🗑 削除する</button>
         </div>
+		<div>
+		<!-- カレンダーに戻る -->
+		<button type="submit" name="backCalender">← 詳細画面に戻る</button>
+		</div>
 
-    </form>
-    <!-- カレンダーに戻る -->
-    <form th:action="@{/Team7_fromDelete}" method="post">
-        <button type="submit" name="back">← 詳細画面に戻る</button>
     </form>
 
 </body>
