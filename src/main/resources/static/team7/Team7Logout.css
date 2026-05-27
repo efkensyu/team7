@@ -1,0 +1,78 @@
+/* style.css */
+
+/* 1. ページ全体の基本設定（背景を明るい青に設定） */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #eef5ff; /* 明るく爽やかなブルー */
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* 2. フォーム（中央の白いダイアログボックス） */
+form {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+/* 3. ユーザー名表示部分 */
+.username-info {
+  font-size: 0.85rem;
+  color: #666666;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* 4. 質問テキスト */
+p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  color: #1a1a1a;
+}
+
+/* 5. ボタンを横並びにするコンテナ */
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
+/* 6. ボタンの共通スタイル */
+input[type="submit"] {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* 7. 「はい」ボタン（ダークカラーで強調） */
+input[name="yes"] {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-color: #1a1a1a;
+}
+
+input[name="yes"]:hover {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+/* 8. 「いいえ」ボタン（ホバー時に薄いグレー） */
+input[name="no"]:hover {
+  background-color: #f1f1f1;
+  border-color: #cccccc;
+}

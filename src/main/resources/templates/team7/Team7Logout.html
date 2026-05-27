@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログアウト確認</title>
+<!-- 外部CSSファイルの読み込み（静的表示用とThymeleaf用のハイブリッド指定） -->
+<link rel="stylesheet" type="text/css" href="Team7/Team7Logout.css">
 </head>
 <body>
+
 	<form method="post" th:action="@{/Team7_fromLogout}" th:object="${Team7AccountForm}">
-		<th:block th:text="ユーザー名 + ${userNm}"></th:block>
+		<!-- ユーザー名部分にCSS用のクラスを追加 -->
+		<span class="username-info">
+			<th:block th:text="'ユーザー名: ' + ${userNm}"></th:block>
+		</span>
+		
 		<p>ログアウトしますか？</p>
-		<input type="submit" name="yes" value="はい" />
-		<input type="submit" name="no" value="いいえ" />
+		
+		<!-- ボタンを綺麗に横並びにするためのラッパー -->
+		<div class="button-group">
+			<input type="submit" name="yes" value="はい" />
+			<input type="submit" name="no" value="いいえ" />
+		</div>
 	</form>
 
 </body>
