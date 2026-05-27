@@ -19,6 +19,7 @@
   --color-accent:         #ffd1e6;
   --color-white:          #ffffff;
   --color-text:           #1a3a5c;
+  --color-error-yellow:   #ffff33; /* 濃い青背景でもパッと目を引くネオンイエロー */
 
   --font-family:          'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
   --font-size-base:       1rem;
@@ -177,6 +178,7 @@ input[type="submit"]:hover {
 input[name="back"] {
   background-color: var(--color-white);
   color: var(--color-text);
+  margin-top: 4px; /* 上のフォームとの間隔を微調整 */
 }
 
 input[name="back"]:hover {
@@ -193,4 +195,17 @@ input[name="confilm"] {
 
 input[name="confilm"]:hover {
   background-color: hotpink;
+}
+
+/* ------------------------------------------------------------
+   12. エラーメッセージ設定
+   ------------------------------------------------------------ */
+form span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-error-yellow);
+  margin-top: 2px;
+  display: block;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 4px rgba(255, 255, 51, 0.3); /* テキストを微かに発光させて認識しやすく */
 }
