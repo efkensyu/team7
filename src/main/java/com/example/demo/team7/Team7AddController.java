@@ -51,20 +51,24 @@ public class Team7AddController {
 //    	System.out.println("★ confilm: data=" + form.getData());
     	if (result.hasErrors()) {
     		model.addAttribute("userId",userId);
-    		System.out.println(userId);
+//    		System.out.println(userId);
     		return "team7/Team7PlanAdd";
     	}
         model.addAttribute("team7CalenderForm", form);
+        model.addAttribute("userId", userId);
         return "team7/Team7PlanConfirm";
     }
 
     @PostMapping(value = "/Team7_fromPlanConfirm", params = "back")
     public String planconback(@ModelAttribute("Team7CalenderForm") Team7CalenderForm form,
+    		    @RequestParam("userId") String userId,
 //			@RequestParam("year") int year,
 //			@RequestParam("month") int month,
 //			@RequestParam(required = false) int[] day,
     		Model model) {
         model.addAttribute("team7CalenderForm", form);
+		model.addAttribute("userId",userId);
+		System.out.println(userId);
 //        model.addAttribute("year", year);
 //		model.addAttribute("month", month);
 //		if (day != null && day.length > 0) {
@@ -94,7 +98,10 @@ public class Team7AddController {
     }
 
     @PostMapping(value = "/Team7_fromfinal", params = "back")
-    public String calenderback(@ModelAttribute Team7CalenderForm form) {
+    public String calenderback(@ModelAttribute Team7CalenderForm form,
+            @SessionAttribute("Team7AccountForm") Team7Form accountForm,
+            Model model) {
+    	model.addAttribute("team7CalenderForm", new Team7CalenderForm());
         return "redirect:/Team7Calender";
     }
 }

@@ -20,6 +20,8 @@
         <input type="hidden" th:field="*{detail}" />
 
         <input type="submit" name="back" value="修正" />
+		<input type="hidden" name="userId" th:value="${userId}" />
+
         <input type="submit" name="next" value="登録" />
 
     </form>
